@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Search_for_a_medicine_by_the_photo_of_its_packaging</RootNamespace>
+  </PropertyGroup>
+
+</Project>

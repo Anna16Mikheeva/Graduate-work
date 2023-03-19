@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32428.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Search for a medicine by the photo of its packaging", "Search for a medicine by the photo of its packaging\Search for a medicine by the photo of its packaging.csproj", "{679C8225-BA6E-4763-AA01-1FC8572088B4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{679C8225-BA6E-4763-AA01-1FC8572088B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{679C8225-BA6E-4763-AA01-1FC8572088B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{679C8225-BA6E-4763-AA01-1FC8572088B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{679C8225-BA6E-4763-AA01-1FC8572088B4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FFAAD150-F8CA-4116-86CD-6242E9FEACAA}
+	EndGlobalSection
+EndGlobal
