@@ -49,12 +49,19 @@
         position: relative;
         margin: 15px 0;
         text-align: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
     }
 
     .input__file {
         opacity: 0;
         visibility: hidden;
         position: absolute;
+        text-align: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
     }
 
     .input__file-icon-wrapper {
@@ -72,6 +79,31 @@
         justify-content: center;
         border-right: 1px solid #fff;
     }
+
+    .input_button-icon-wrapper {
+        position: relative;
+        left: 78px;
+        width: 60px;
+        height: 60px;
+        border: none;
+        background: #1bbc9b;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+
+    }
+
+        .input_button-icon-wrapper:before {
+            content: "\f002";
+            font-family: FontAwesome;
+            font-size: 16px;
+            color: #fff;
+        }
 
     .input__file-button-text {
         line-height: 1;
@@ -95,7 +127,9 @@
         -webkit-box-pack: start;
         -ms-flex-pack: start;
         justify-content: flex-start;
-        border-radius: 3px;
+        border-radius: 0px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
         cursor: pointer;
         margin: 0 auto;
     }
@@ -121,7 +155,7 @@
         <label asp-for="PackingImage" for="input__file" class="input__file-button">
             <span class="input__file-icon-wrapper"><img class="input__file-icon" src="https://smartlanding.biz/demo/fileinput/img/add.svg" alt="Выбрать файл" width="25"></span>
             <span class="input__file-button-text">Выберите файл</span>
-            <button class="input__file-icon-wrapper" type="submit" asp-action="TextRecognising"></button>
+            <button class="input_button-icon-wrapper" type="submit" asp-action="Delete"></button>
         </label>
 
 

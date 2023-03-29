@@ -8,6 +8,7 @@ using Search_for_a_medicine_by_the_photo_of_its_packaging.Models;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Tesseract;
+using System.Net.Http;
 
 namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
 {
@@ -15,7 +16,6 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        //private Image image = new Image();
 
         public HomeController(ILogger<HomeController> logger, IWebHostEnvironment webHostEnvironment)
         {
@@ -23,10 +23,10 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
 
         public IActionResult Privacy()
         {
@@ -42,28 +42,31 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
         [HttpPost]
         public string TextRecognising(Image image)
         {
-            //string fileName = null;
-            //if (image.PackingImage != null)
-            //{
-            //    string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "Img");
-            //    fileName = Guid.NewGuid().ToString() + "-" + image.PackingImage.FileName;
-            //    string filePath = Path.Combine(uploadDir, fileName);
-            //    using (var fileStream = new FileStream(filePath, FileMode.Create))
-            //    {
-            //        image.PackingImage.CopyTo(fileStream);
-            //    }
-            //}
-            var img = Tes(image);
-            return img;
+            if (image.PackingImage != null)
+            {
+                var ocrengine = new TesseractEngine(@".\tessdata", "rus+eng", EngineMode.Default);
+                var img = Pix.LoadFromFile(image.PackingImage.FileName);
+                var res = ocrengine.Process(img);
+                image.DD = res.GetText();
+                return image.DD;
+            }
+            else
+            {
+                return "Ошибка!";
+            }
+            Index();
         }
 
-        public string Tes(Image image)
+        public async Task<IActionResult> Index()
         {
-            var ocrengine = new TesseractEngine(@".\tessdata", "rus+eng", EngineMode.Default);
-            var img = Pix.LoadFromFile(image.PackingImage.FileName);
-            var res = ocrengine.Process(img);
-            image.DD = res.GetText();
-            return image.DD;
+            string json;
+            string token = "aII4Hhj1EaeQ";
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Add("X-Token", token);
+                json = await httpClient.GetStringAsync("http://www.vidal.ru/api/rest/v1/product/list?filter[name]=Аспирин&page=1&limit=5");
+            }
+            return View();
         }
     }
 }
