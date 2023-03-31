@@ -1,7 +1,14 @@
-﻿@model IEnumerable<Search_for_a_medicine_by_the_photo_of_its_packaging.Models.Image>
+﻿@model Search_for_a_medicine_by_the_photo_of_its_packaging.Models.Image
 @{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
+@if(Model != null)
+{
+    
 
-
+        if (Model.AvailabilityOfInformation == true)
+        {
+            <h3><p>Владелец регистрационного удостоверения:</p></h3>@Html.DisplayFor(modelItem => Model.DD)
+        }
+    
+}
