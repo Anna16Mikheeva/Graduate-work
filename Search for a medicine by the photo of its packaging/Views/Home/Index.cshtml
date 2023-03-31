@@ -1,6 +1,8 @@
 ﻿@model Search_for_a_medicine_by_the_photo_of_its_packaging.Models.Image
 @*@model IEnumerable<Search_for_a_medicine_by_the_photo_of_its_packaging.Models.Image>*@
 
+@{ ViewData["Title"] = "Home Page"; }
+
 <style>
 
     /*Для поля и кнопки поиска*/
@@ -111,17 +113,17 @@
 </script>
 
 <div class="text-center">
-    <form asp-controller="Home" class="form_line_search">
+    <form asp-action="TextRecognising" class="form_line_search" enctype="multipart/form-data">
         <input id="id_of_textbox" class="input_line_search" type="text" placeholder="Искать здесь...">
-        <button id="id_of_button" class="button_line_search" type="submit" asp-controller="Home" asp-action="TextRecognising"></button>
+        <button id="id_of_button" class="button_line_search" type="submit" asp-controller="Home" asp-action="Privacy"></button>
 
         <div class="input__wrapper">
             <input asp-for="PackingImage" name="PackingImage" type="file" id="input__file" accept="image/jpeg,image/png" class="input input__file" multiple>
-            <label asp-for="PackingImage" for="input__file" class="input__file-button">
-                <span class="input__file-icon-wrapper"><img class="input__file-icon" src="https://smartlanding.biz/demo/fileinput/img/add.svg" width="25"></span>
-                <span class="input__file-button-text">Выберите файл</span>
+        <label asp-for="PackingImage" for="input__file" class="input__file-button">
+            <span class="input__file-icon-wrapper"><img class="input__file-icon" src="https://smartlanding.biz/demo/fileinput/img/add.svg" alt="Выбрать файл" width="25"></span>
+        <span class="input__file-button-text">Выберите файл</span>
+            <button class="button_line_search" type="submit" asp-controller="Home" asp-action="TextRecognising"></button>
             </label>
-            <button id="id_of_button" class="button_line_search" type="submit" asp-controller="Home" asp-action="TextRecognising"></button>
         </div>
     </form>
 </div>
