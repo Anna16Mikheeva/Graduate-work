@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 
-@*<style>
+<style>
 
     /*Для поля и кнопки поиска*/
     * {
@@ -117,7 +117,7 @@
             $(this).val('');
         }
     });
-</script>*@
+</script>
 
 <body>
     <style>
@@ -138,8 +138,8 @@
                 </div>
             </div>
         </nav>
-        @*<div class="text-center">
-            <form asp-controller="Home" class="form_line_search">
+        <div class="text-center">
+            <form asp-controller="Home" class="form_line_search" enctype="multipart/form-data">
                 <input id="id_of_textbox" class="input_line_search" type="text" placeholder="Искать здесь...">
                 <button id="id_of_button" class="button_line_search" type="submit" asp-controller="Home" asp-action="TextRecognising"></button>
 
@@ -152,7 +152,7 @@
                     <button id="id_of_button" class="button_line_search" type="submit" asp-controller="Home" asp-action="TextRecognising"></button>
                 </div>
             </form>
-        </div>*@
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
