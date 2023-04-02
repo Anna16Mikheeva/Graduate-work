@@ -52,13 +52,13 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Models
             public string rusName { get; set; }//+
             public string engName { get; set; }//+
             public bool nonPrescriptionDrug { get; set; }
-            public string registrationDate { get; set; }
+            public string registrationDate { get; set; }//+
             public string dateOfCloseRegistration { get; set; }
-            public string registrationNumber { get; set; }
-            public string zipInfo { get; set; }
+            public string registrationNumber { get; set; }//+
+            public string zipInfo { get; set; }//+
             public string composition { get; set; }
             public string productTypeCode { get; set; }
-            public Marketstatus marketStatus { get; set; }
+            public Marketstatus marketStatus { get; set; }//+
             public string dateOfReRegistration { get; set; }
             public bool gnvls { get; set; }
             public object listPkkn { get; set; }
@@ -87,26 +87,26 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Models
             public int documentId { get; set; }
             public int articleId { get; set; }
             public string yearEdition { get; set; }
-            public string phInfluence { get; set; }
-            public object phKinetics { get; set; }
+            public string phInfluence { get; set; }//+
+            public object phKinetics { get; set; }//+
             public string dosage { get; set; }
             public object overDosage { get; set; }
-            public string interaction { get; set; }
-            public string lactation { get; set; }
-            public string sideEffects { get; set; }
-            public string indication { get; set; }
-            public string contraIndication { get; set; }
-            public string specialInstruction { get; set; }
+            public string interaction { get; set; }//+
+            public string lactation { get; set; }//+
+            public string sideEffects { get; set; }//+
+            public string indication { get; set; }//+
+            public string contraIndication { get; set; }//+
+            public string specialInstruction { get; set; }//+
             public string pregnancyUsing { get; set; }
             public string nursingUsing { get; set; }
-            public string renalInsuf { get; set; }
+            public string renalInsuf { get; set; }//+
             public string renalInsufUsing { get; set; }
-            public string hepatoInsuf { get; set; }
+            public string hepatoInsuf { get; set; }//+
             public string hepatoInsufUsing { get; set; }
             public object pharmDelivery { get; set; }
             public object elderlyInsuf { get; set; }
             public string elderlyInsufUsing { get; set; }
-            public string childInsuf { get; set; }
+            public string childInsuf { get; set; }//+
             public string childInsufUsing { get; set; }
         }
 
@@ -192,6 +192,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Models
             public object companyRusNote { get; set; }
         }
 
+        //+
         public class Company1
         {
             public string name { get; set; }//+
@@ -199,6 +200,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Models
             public Country country { get; set; }//+
         }
 
+        //+
         public class Country
         {
             public string code { get; set; }

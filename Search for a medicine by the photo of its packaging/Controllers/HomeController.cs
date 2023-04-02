@@ -57,7 +57,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                 return "Ошибка!";
             }
         }
-        
+
         public async Task<string> Privacy()
         {
             image.AvailabilityOfInformation = true;
@@ -66,12 +66,13 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             using var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("X-Token", token);
             //json = await httpClient.GetStringAsync(@"http://www.vidal.ru/api/rest/v1/product/list?filter[name]=Цитрамон");
-            var jsonString = System.IO.File.ReadAllText("D://Аня//Диплом//Graduate work//Search for a medicine by the photo of its packaging//JSON.json");
+            var jsonString = System.IO.File.ReadAllText("D://Аня//Диплом//Graduate work//Search for a medicine by the photo of its packaging//Product.json");
             var country = JsonConvert.DeserializeObject<FileJson.Country>(jsonString);
             var company1 = JsonConvert.DeserializeObject<FileJson.Company1>(jsonString);
             var company = JsonConvert.DeserializeObject<FileJson.Company>(jsonString);
             var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
             var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
+
             var rusName = rootobject.products[0].companies[0].company.name.ToString();//нужно ли?
             var engName = rootobject.products[0].companies[0].company.GDDBName.ToString();//нужно ли?
             var countryRusName = rootobject.products[1].companies[0].company.country.rusName.ToString();//нужно ли?
@@ -85,6 +86,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
         {
             var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
             var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
+
             var rusName = rootobject.products[0].rusName;
             var engName = rootobject.products[0].engName;
         }
@@ -94,6 +96,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             var atcCode = JsonConvert.DeserializeObject<FileJson.Atccode>(jsonString);
             var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
             var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
+
             var rusName = rootobject.products[0].atcCodes[0].rusName;
             var code = rootobject.products[0].atcCodes[0].code;
         }
@@ -111,12 +114,42 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             string[] GNParent = new string[count];
             string[] description = new string[count];
 
-            for (int i = 0; i < count;i++)
+            for (int i = 0; i < count; i++)
             {
                 latName[i] = rootobject.products[0].moleculeNames[i].molecule.latName;
                 rusName[i] = rootobject.products[0].moleculeNames[i].molecule.rusName;
                 GNParent[i] = rootobject.products[0].moleculeNames[i].molecule.GNParent.GNParent;
                 description[i] = rootobject.products[0].moleculeNames[i].molecule.GNParent.description;
+            }
+        }
+
+        public void DosageForm(string jsonString)
+        {
+            var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
+            var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
+
+            var zipInfo = rootobject.products[0].zipInfo;
+            var registrationNumber = rootobject.products[0].registrationNumber;//надо ли?
+            var registrationDate = rootobject.products[0].registrationDate;//надо ли?
+        }
+
+        public void PharmachologicEffect(string jsonString)
+        {
+            var document = JsonConvert.DeserializeObject<FileJson.Document>(jsonString);
+            var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
+            var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
+
+            var phInfluence = rootobject.products[0].document.phInfluence;//Фармакологическое действие
+            var indication = rootobject.products[0].document.indication;//Показания активных веществ препарата 
+            var phKinetics = rootobject.products[0].document.phKinetics;//Режим дозирования
+            var sideEffects = rootobject.products[0].document.sideEffects;//Побочное действие
+            var contraIndication = rootobject.products[0].document.contraIndication;//Противопоказания к применению
+            var lactation = rootobject.products[0].document.lactation;//Применение при беременности и кормлении грудью
+            var hepatoInsuf = rootobject.products[0].document.hepatoInsuf;//Применение при нарушениях функции печени
+            var renalInsuf = rootobject.products[0].document.renalInsuf;//Применение при нарушениях функции почек
+            var childInsuf = rootobject.products[0].document.childInsuf;//Применение у детей
+            var specialInstruction = rootobject.products[0].document.specialInstruction;//Особые указания
+            var interaction = rootobject.products[0].document.interaction;//Лекарственное взаимодействие
+        }
         }
     }
-}
