@@ -66,15 +66,15 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             using var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("X-Token", token);
             //json = await httpClient.GetStringAsync(@"http://www.vidal.ru/api/rest/v1/product/list?filter[name]=Цитрамон");
-            var jsonString = System.IO.File.ReadAllText("D://Аня//Диплом//Graduate work//Search for a medicine by the photo of its packaging//Product.json");
+            var jsonString = System.IO.File.ReadAllText("D://Аня//Диплом//Graduate work//Search for a medicine by the photo of its packaging//JSON.json");
             var country = JsonConvert.DeserializeObject<FileJson.Country>(jsonString);
             var company1 = JsonConvert.DeserializeObject<FileJson.Company1>(jsonString);
             var company = JsonConvert.DeserializeObject<FileJson.Company>(jsonString);
             var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
             var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
-            var rusName = rootobject.products[0].companies[0].company.name.ToString();
-            var engName = rootobject.products[0].companies[0].company.GDDBName.ToString();
-            var countryRusName = rootobject.products[1].companies[0].company.country.rusName.ToString();
+            var rusName = rootobject.products[0].companies[0].company.name.ToString();//нужно ли?
+            var engName = rootobject.products[0].companies[0].company.GDDBName.ToString();//нужно ли?
+            var countryRusName = rootobject.products[1].companies[0].company.country.rusName.ToString();//нужно ли?
             DrugName(jsonString);
             CodeATC(jsonString);
             ActiveSubstances(jsonString);
@@ -104,20 +104,19 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             var gnparent = JsonConvert.DeserializeObject<FileJson.Gnparent>(jsonString);
             var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
             var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
-            var latNameCaffeine = rootobject.products[0].moleculeNames[0].molecule.latName;
-            var rusNameCaffeine = rootobject.products[0].moleculeNames[0].molecule.rusName;
-            var GNParentCaffeine = rootobject.products[0].moleculeNames[0].molecule.GNParent.GNParent;
-            var descriptionCaffeine = rootobject.products[0].moleculeNames[0].molecule.GNParent.description;
 
-            var latNameParacetamol = rootobject.products[0].moleculeNames[1].molecule.latName;
-            var rusNameParacetamol = rootobject.products[0].moleculeNames[1].molecule.rusName;
-            var GNParentParacetamol = rootobject.products[0].moleculeNames[1].molecule.GNParent.GNParent;
-            var descriptionParacetamol = rootobject.products[0].moleculeNames[1].molecule.GNParent.description;
+            var count = rootobject.products[0].moleculeNames.Length;
+            string[] latName = new string[count];
+            string[] rusName = new string[count];
+            string[] GNParent = new string[count];
+            string[] description = new string[count];
 
-            var latNameAcetylsalicylicAcid = rootobject.products[0].moleculeNames[2].molecule.latName;
-            var rusNameAcetylsalicylicAcid = rootobject.products[0].moleculeNames[2].molecule.rusName;
-            var GNParentAcetylsalicylicAcid = rootobject.products[0].moleculeNames[2].molecule.GNParent.GNParent;
-            var descriptionAcetylsalicylicAcid = rootobject.products[0].moleculeNames[2].molecule.GNParent.description;
+            for (int i = 0; i < count;i++)
+            {
+                latName[i] = rootobject.products[0].moleculeNames[i].molecule.latName;
+                rusName[i] = rootobject.products[0].moleculeNames[i].molecule.rusName;
+                GNParent[i] = rootobject.products[0].moleculeNames[i].molecule.GNParent.GNParent;
+                description[i] = rootobject.products[0].moleculeNames[i].molecule.GNParent.description;
         }
     }
 }
