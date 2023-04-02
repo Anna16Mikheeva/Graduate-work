@@ -79,6 +79,8 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             DrugName(jsonString);
             CodeATC(jsonString);
             ActiveSubstances(jsonString);
+            DosageForm(jsonString);
+            PharmachologicEffect(jsonString);
             return jsonString;
         }
 
@@ -141,7 +143,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
 
             var phInfluence = rootobject.products[0].document.phInfluence;//Фармакологическое действие
             var indication = rootobject.products[0].document.indication;//Показания активных веществ препарата 
-            var phKinetics = rootobject.products[0].document.phKinetics;//Режим дозирования
+            var dosage = rootobject.products[0].document.dosage;//Режим дозирования
             var sideEffects = rootobject.products[0].document.sideEffects;//Побочное действие
             var contraIndication = rootobject.products[0].document.contraIndication;//Противопоказания к применению
             var lactation = rootobject.products[0].document.lactation;//Применение при беременности и кормлении грудью
