@@ -58,18 +58,36 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             }
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Privacy()
         {
+            //image.AvailabilityOfInformation = true;
+            //string json;
+            //string token = "aII4Hhj1EaeQ";
+            //using var httpClient = new HttpClient();
+            DataNames dataNames = new DataNames();
+            ////httpClient.DefaultRequestHeaders.Add("X-Token", token);
+            ////json = await httpClient.GetStringAsync(@"http://www.vidal.ru/api/rest/v1/product/list?filter[name]=Цитрамон");
+            //var jsonString = System.IO.File.ReadAllText("D://Аня//Диплом//Graduate work//Search for a medicine by the photo of its packaging//Product.json");
+
+            //dataNames = DescriptionOfTheDrug(jsonString, dataNames);
+
+            //return View("Index",image);
+
+            Image image = new Image();
             image.AvailabilityOfInformation = true;
+            string json;
             string token = "aII4Hhj1EaeQ";
             using var httpClient = new HttpClient();
-            DataNames dataNames = new DataNames();
             httpClient.DefaultRequestHeaders.Add("X-Token", token);
             //json = await httpClient.GetStringAsync(@"http://www.vidal.ru/api/rest/v1/product/list?filter[name]=Цитрамон");
             var jsonString = System.IO.File.ReadAllText("D://Аня//Диплом//Graduate work//Search for a medicine by the photo of its packaging//Product.json");
-
-            dataNames = DescriptionOfTheDrug(jsonString, dataNames);
-
+            //var company1 = JsonConvert.DeserializeObject<FileJson.Company1>(jsonString);
+            //var company = JsonConvert.DeserializeObject<FileJson.Company>(jsonString);
+            //var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
+            //var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
+            dataNames.AtcCode = "rootobject.products[1].companies[0].company.name.ToString()";
             return View(dataNames);
         }
 

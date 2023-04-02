@@ -1,5 +1,14 @@
-﻿@model Search_for_a_medicine_by_the_photo_of_its_packaging.Models.Image
-@*@model IEnumerable<Search_for_a_medicine_by_the_photo_of_its_packaging.Models.Image>*@
+﻿@model IEnumerable<Search_for_a_medicine_by_the_photo_of_its_packaging.Models.DataNames>
 
-@{ ViewData["Title"] = "Home Page"; }
 
+@if (Model != null)
+{
+    @foreach (var item in Model)
+    {
+        //if (Model.AvailabilityOfInformation == true)
+        //{
+        < h3 >< p > Код АТХ:</ p ></ h3 > @Html.DisplayFor(modelItem => item.AtcCode)
+        //}
+
+    }
+}
