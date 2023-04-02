@@ -58,100 +58,88 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             }
         }
 
-        public async Task<string> Privacy()
+        public async Task<IActionResult> Privacy()
         {
             image.AvailabilityOfInformation = true;
-            string json;
             string token = "aII4Hhj1EaeQ";
             using var httpClient = new HttpClient();
+            DataNames dataNames = new DataNames();
             httpClient.DefaultRequestHeaders.Add("X-Token", token);
             //json = await httpClient.GetStringAsync(@"http://www.vidal.ru/api/rest/v1/product/list?filter[name]=Цитрамон");
             var jsonString = System.IO.File.ReadAllText("D://Аня//Диплом//Graduate work//Search for a medicine by the photo of its packaging//Product.json");
-            var country = JsonConvert.DeserializeObject<FileJson.Country>(jsonString);
-            var company1 = JsonConvert.DeserializeObject<FileJson.Company1>(jsonString);
-            var company = JsonConvert.DeserializeObject<FileJson.Company>(jsonString);
-            var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
-            var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
 
-            var rusName = rootobject.products[0].companies[0].company.name.ToString();//нужно ли?
-            var engName = rootobject.products[0].companies[0].company.GDDBName.ToString();//нужно ли?
-            var countryRusName = rootobject.products[1].companies[0].company.country.rusName.ToString();//нужно ли?
-            DrugName(jsonString);
-            CodeATC(jsonString);
-            ActiveSubstances(jsonString);
-            DosageForm(jsonString);
-            PharmachologicEffect(jsonString);
-            return jsonString;
+            dataNames = DescriptionOfTheDrug(jsonString, dataNames);
+
+            return View(dataNames);
         }
 
-        public void DrugName(string jsonString)
-        {
-            var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
-            var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
-
-            var rusName = rootobject.products[0].rusName;
-            var engName = rootobject.products[0].engName;
-        }
-
-        public void CodeATC(string jsonString)
+        /// <summary>
+        /// Описание препарата
+        /// </summary>
+        /// <param name="jsonString"></param>
+        public DataNames DescriptionOfTheDrug(string jsonString, DataNames dataNames)
         {
             var atcCode = JsonConvert.DeserializeObject<FileJson.Atccode>(jsonString);
-            var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
-            var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
-
-            var rusName = rootobject.products[0].atcCodes[0].rusName;
-            var code = rootobject.products[0].atcCodes[0].code;
-        }
-
-        public void ActiveSubstances(string jsonString)
-        {
             var moleculeName = JsonConvert.DeserializeObject<FileJson.Moleculename>(jsonString);
             var gnparent = JsonConvert.DeserializeObject<FileJson.Gnparent>(jsonString);
-            var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
-            var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
-
-            var count = rootobject.products[0].moleculeNames.Length;
-            string[] latName = new string[count];
-            string[] rusName = new string[count];
-            string[] GNParent = new string[count];
-            string[] description = new string[count];
-
-            for (int i = 0; i < count; i++)
-            {
-                latName[i] = rootobject.products[0].moleculeNames[i].molecule.latName;
-                rusName[i] = rootobject.products[0].moleculeNames[i].molecule.rusName;
-                GNParent[i] = rootobject.products[0].moleculeNames[i].molecule.GNParent.GNParent;
-                description[i] = rootobject.products[0].moleculeNames[i].molecule.GNParent.description;
-            }
-        }
-
-        public void DosageForm(string jsonString)
-        {
-            var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
-            var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
-
-            var zipInfo = rootobject.products[0].zipInfo;
-            var registrationNumber = rootobject.products[0].registrationNumber;//надо ли?
-            var registrationDate = rootobject.products[0].registrationDate;//надо ли?
-        }
-
-        public void PharmachologicEffect(string jsonString)
-        {
             var document = JsonConvert.DeserializeObject<FileJson.Document>(jsonString);
             var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
             var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
 
-            var phInfluence = rootobject.products[0].document.phInfluence;//Фармакологическое действие
-            var indication = rootobject.products[0].document.indication;//Показания активных веществ препарата 
-            var dosage = rootobject.products[0].document.dosage;//Режим дозирования
-            var sideEffects = rootobject.products[0].document.sideEffects;//Побочное действие
-            var contraIndication = rootobject.products[0].document.contraIndication;//Противопоказания к применению
-            var lactation = rootobject.products[0].document.lactation;//Применение при беременности и кормлении грудью
-            var hepatoInsuf = rootobject.products[0].document.hepatoInsuf;//Применение при нарушениях функции печени
-            var renalInsuf = rootobject.products[0].document.renalInsuf;//Применение при нарушениях функции почек
-            var childInsuf = rootobject.products[0].document.childInsuf;//Применение у детей
-            var specialInstruction = rootobject.products[0].document.specialInstruction;//Особые указания
-            var interaction = rootobject.products[0].document.interaction;//Лекарственное взаимодействие
-        }
+            //Название препарата на русском
+            dataNames.NameDrugsRus = rootobject.products[0].rusName;
+            //Название препарата на английском
+            dataNames.NameDrugsEng = rootobject.products[0].engName;
+            //Название вещества
+            dataNames.SubstanceName = rootobject.products[0].atcCodes[0].rusName;
+            //Название АТХ кода
+            dataNames.AtcCode = rootobject.products[0].atcCodes[0].code;
+            //Количество активных веществ
+            var count = rootobject.products[0].moleculeNames.Length;
+
+            //Массив с названиями активных веществ на английском
+            dataNames.NameOfActiveSubstancesEng = new string[count];
+            //Массив с названиями активных веществ на русском
+            dataNames.NameOfActiveSubstancesRus = new string[count];
+            //Название кампании(или что это)
+            dataNames.NameCompanyRus = new string[count];
+            //Обьяснение кампании(или что это) на русском
+            dataNames.NameCompanyEng = new string[count];
+
+            for (int i = 0; i < count; i++)
+            {
+                dataNames.NameOfActiveSubstancesEng[i] = rootobject.products[0].moleculeNames[i].molecule.latName;
+                dataNames.NameOfActiveSubstancesRus[i] = rootobject.products[0].moleculeNames[i].molecule.rusName;
+                dataNames.NameCompanyRus[i] = rootobject.products[0].moleculeNames[i].molecule.GNParent.GNParent;
+                dataNames.NameCompanyEng[i] = rootobject.products[0].moleculeNames[i].molecule.GNParent.description;
+            }
+
+            //Лекарственная форма(кол-во таблеток и т.д.)
+            dataNames.DosageForm = rootobject.products[0].zipInfo;
+            //Фармакологическое действие
+            dataNames.pPharmachologicEffect = rootobject.products[0].document.phInfluence;
+            //Показания активных веществ препарата 
+            dataNames.IndicationsOfTheActiveSubstancesOfTheDrug = rootobject.products[0].document.indication;
+            //Режим дозирования
+            dataNames.DosingRegimen = rootobject.products[0].document.dosage;
+            //Побочное действие
+            dataNames.SideEffect = rootobject.products[0].document.sideEffects;
+            //Противопоказания к применению
+            dataNames.ContraindicationsForUse = rootobject.products[0].document.contraIndication;
+            //Применение при беременности и кормлении грудью
+            dataNames.UseDuringPregnancyAndLactation = rootobject.products[0].document.lactation;
+            //Применение при нарушениях функции печени
+            dataNames.ApplicationForViolationsOfLiverFunction = rootobject.products[0].document.hepatoInsuf;
+            //Применение при нарушениях функции почек
+            dataNames.ApplicationForViolationsOfKidneyFunction = rootobject.products[0].document.renalInsuf;
+            //Применение у детей
+            dataNames.UseInChildren = rootobject.products[0].document.childInsuf;
+            //Особые указания
+            dataNames.SpecialInstructions = rootobject.products[0].document.specialInstruction;
+            //Лекарственное взаимодействие
+            dataNames.DrugInteraction = rootobject.products[0].document.interaction;
+
+            return dataNames;
         }
     }
+}

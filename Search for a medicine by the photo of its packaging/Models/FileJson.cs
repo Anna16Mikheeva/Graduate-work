@@ -20,10 +20,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Models
             public Moleculename[] moleculeNames { get; set; }//+
             public string rusName { get; set; }//+
             public string engName { get; set; }//+
-            public string registrationDate { get; set; }//+
-            public string registrationNumber { get; set; }//+
             public string zipInfo { get; set; }//+
-            public Company[] companies { get; set; }//+
             public Document document { get; set; }//+
         }
 
@@ -68,20 +65,6 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Models
         {
             public string GNParent { get; set; }//+
             public string description { get; set; }//+
-        }
-
-        //+
-        public class Company
-        {
-            public Company1 company { get; set; }//+
-        }
-
-        //+
-        public class Company1
-        {
-            public string name { get; set; }//+
-            public string GDDBName { get; set; }//+
-            public Country country { get; set; }//+
         }
 
         //+
