@@ -1,13 +1,10 @@
-﻿using System;
-using System.IO;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using Search_for_a_medicine_by_the_photo_of_its_packaging.Models;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Tesseract;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Web;
@@ -16,15 +13,15 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly PhotoProcessing image = new PhotoProcessing();
+        //private readonly ILogger<HomeController> _logger;
+        //private readonly IWebHostEnvironment _webHostEnvironment;
+        //private readonly PhotoProcessing image = new PhotoProcessing();
 
-        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment webHostEnvironment)
-        {
-            _logger = logger;
-            _webHostEnvironment = webHostEnvironment;
-        }
+        //public HomeController(ILogger<HomeController> logger, IWebHostEnvironment webHostEnvironment)
+        //{
+        //    _logger = logger;
+        //    _webHostEnvironment = webHostEnvironment;
+        //}
 
         //public IActionResult Index()
         //{
@@ -60,7 +57,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
         //}
 
         
-        public async Task<IActionResult> Index()
+        public async Task<ActionResult> Index()
         {
             DataNames dataNames = new DataNames();
             string json;
@@ -70,6 +67,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             //json = await httpClient.GetStringAsync(@"http://www.vidal.ru/api/rest/v1/product/list?filter[name]=Цитрамон");
             var jsonString = System.IO.File.ReadAllText("D://Аня//Диплом//Graduate work//Search for a medicine by the photo of its packaging//Product.json");
             dataNames = DescriptionOfTheDrug(jsonString, dataNames);
+            
             return View(dataNames);
         }
 
