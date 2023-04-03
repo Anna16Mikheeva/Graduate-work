@@ -56,11 +56,6 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Models
         public string[] NameCompanyEng { get; set; }
 
         /// <summary>
-        /// Лекарственная форма(кол-во таблеток и т.д.)
-        /// </summary>
-        public string DosageForm { get; set; }
-
-        /// <summary>
         /// Фармакологическое действие
         /// </summary>
         public string pPharmachologicEffect { get; set; }

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Tesseract;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Web;
 
 namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
 {
@@ -17,7 +18,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly Image image = new Image();
+        private readonly PhotoProcessing image = new PhotoProcessing();
 
         public HomeController(ILogger<HomeController> logger, IWebHostEnvironment webHostEnvironment)
         {
@@ -25,10 +26,10 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
 
         //public IActionResult Privacy()
         //{
@@ -41,53 +42,34 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [HttpPost]
-        public string TextRecognising(Image image)
-        {
-            if (image.PackingImage != null)
-            {
-                var ocrengine = new TesseractEngine(@".\tessdata", "rus+eng", EngineMode.Default);
-                var loadFromFile = Pix.LoadFromFile(image.PackingImage.FileName);
-                var process = ocrengine.Process(loadFromFile);
-                var textGhoto = process.GetText();
-                return textGhoto;
-            }
-            else
-            {
-                return "Ошибка!";
-            }
-        }
+        //[HttpPost]
+        //public string TextRecognising(/*Image image*/)
+        //{
+        //    //if (image.PackingImage != null)
+        //    //{
+        //        var ocrengine = new TesseractEngine(@".\tessdata", "rus+eng", EngineMode.Default);
+        //        //var loadFromFile = Pix.LoadFromFile(image.PackingImage.FileName);
+        //        //var process = ocrengine.Process(loadFromFile);
+        //        //var textGhoto = process.GetText();
+        //        return textGhoto;
+        //    //}
+        //    //else
+        //    //{
+        //        return "Ошибка!";
+        //    //}
+        //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Privacy()
+        
+        public async Task<IActionResult> Index()
         {
-            //image.AvailabilityOfInformation = true;
-            //string json;
-            //string token = "aII4Hhj1EaeQ";
-            //using var httpClient = new HttpClient();
             DataNames dataNames = new DataNames();
-            ////httpClient.DefaultRequestHeaders.Add("X-Token", token);
-            ////json = await httpClient.GetStringAsync(@"http://www.vidal.ru/api/rest/v1/product/list?filter[name]=Цитрамон");
-            //var jsonString = System.IO.File.ReadAllText("D://Аня//Диплом//Graduate work//Search for a medicine by the photo of its packaging//Product.json");
-
-            //dataNames = DescriptionOfTheDrug(jsonString, dataNames);
-
-            //return View("Index",image);
-
-            Image image = new Image();
-            image.AvailabilityOfInformation = true;
             string json;
             string token = "aII4Hhj1EaeQ";
             using var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("X-Token", token);
             //json = await httpClient.GetStringAsync(@"http://www.vidal.ru/api/rest/v1/product/list?filter[name]=Цитрамон");
             var jsonString = System.IO.File.ReadAllText("D://Аня//Диплом//Graduate work//Search for a medicine by the photo of its packaging//Product.json");
-            //var company1 = JsonConvert.DeserializeObject<FileJson.Company1>(jsonString);
-            //var company = JsonConvert.DeserializeObject<FileJson.Company>(jsonString);
-            //var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
-            //var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
-            dataNames.AtcCode = "rootobject.products[1].companies[0].company.name.ToString()";
+            dataNames = DescriptionOfTheDrug(jsonString, dataNames);
             return View(dataNames);
         }
 
@@ -132,10 +114,8 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                 dataNames.NameCompanyEng[i] = rootobject.products[0].moleculeNames[i].molecule.GNParent.description;
             }
 
-            //Лекарственная форма(кол-во таблеток и т.д.)
-            dataNames.DosageForm = rootobject.products[0].zipInfo;
             //Фармакологическое действие
-            dataNames.pPharmachologicEffect = rootobject.products[0].document.phInfluence;
+            dataNames.pPharmachologicEffect = HttpUtility.HtmlEncode(rootobject.products[0].document.phInfluence);
             //Показания активных веществ препарата 
             dataNames.IndicationsOfTheActiveSubstancesOfTheDrug = rootobject.products[0].document.indication;
             //Режим дозирования

@@ -1,11 +1,39 @@
 ﻿@model Search_for_a_medicine_by_the_photo_of_its_packaging.Models.DataNames
 
+<div align="justify">
+<font size="4">
 @if (Model != null)
 {
-
-
-    //if (Model.AvailabilityOfInformation == true)
-    //{
-<h3><p>Владелец регистрационного удостоверения:</p></h3>@Html.DisplayFor(modelItem => Model.AtcCode)}
-
-            //}
+<font color=#8B0000><h2>@Html.DisplayFor(modelItem => Model.NameDrugsRus) (@Html.DisplayFor(modelItem => Model.NameDrugsEng))</h2></font>
+<h3>Код АТХ:</h3>@Html.DisplayFor(modelItem => Model.AtcCode)
+<p/><h3>Активные вещества и состав</h3>
+    @for (int i = 0; i < Model.NameOfActiveSubstancesRus.Length;i++)
+    {
+        @Html.DisplayFor(item => item.NameOfActiveSubstancesRus[i]) <font size="3" color="gray">@Html.DisplayFor(item => item.NameOfActiveSubstancesEng[i])</font>
+         <font size="4" color=#566aa3>@Html.DisplayFor(item => item.NameCompanyEng[i]) </font><font size="3" color="gray">@Html.DisplayFor(item => item.NameCompanyRus[i])</font><br />
+     } 
+    <p/><h3>Фармакологическое действие</h3>
+    @Html.DisplayFor(item => item.pPharmachologicEffect) 
+    <p/><h3>Показания активных веществ препарата @Html.DisplayFor(modelItem => Model.NameDrugsRus)</h3>
+    @Html.DisplayFor(item => item.IndicationsOfTheActiveSubstancesOfTheDrug) 
+    <p/><h3>Режим дозирования</h3>
+    @Html.DisplayFor(item => item.DosingRegimen) 
+    <p/><h3>Побочное действие</h3>
+    @Html.DisplayFor(item => item.SideEffect) 
+    <p/><h3>Противопоказания к применению</h3>
+    @Html.DisplayFor(item => item.ContraindicationsForUse) 
+    <p/><h3>Применение при беременности и кормлении грудью</h3>
+    @Html.DisplayFor(item => item.UseDuringPregnancyAndLactation) 
+    <p/><h3>Применение при нарушениях функции печени</h3>
+    @Html.DisplayFor(item => item.ApplicationForViolationsOfLiverFunction) 
+    <p/><h3>Применение при нарушениях функции почек</h3>
+    @Html.DisplayFor(item => item.ApplicationForViolationsOfKidneyFunction) 
+    <p/><h3>Применение у детей</h3>
+    @Html.DisplayFor(item => item.UseInChildren) 
+    <p/><h3>Особые указания</h3>
+    @Html.DisplayFor(item => item.SpecialInstructions) 
+    <p/><h3>Лекарственное взаимодействие</h3>
+    @Html.DisplayFor(item => item.DrugInteraction) 
+}
+</font>
+</div>
