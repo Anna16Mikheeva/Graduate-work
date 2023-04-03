@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Web;
+using System.IO;
 
 namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
 {
@@ -62,10 +63,14 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             DataNames dataNames = new DataNames();
             string json;
             string token = "aII4Hhj1EaeQ";
+            string path = "Product.json";
             using var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("X-Token", token);
-            //json = await httpClient.GetStringAsync(@"http://www.vidal.ru/api/rest/v1/product/list?filter[name]=Цитрамон");
-            var jsonString = System.IO.File.ReadAllText("D://Аня//Диплом//Graduate work//Search for a medicine by the photo of its packaging//Product.json");
+            json = await httpClient.GetStringAsync(@"http://www.vidal.ru/api/rest/v1/product/list?filter[name]=Цитрамон");
+            StreamWriter writer = new StreamWriter(path, false);
+            writer.WriteLine(json);
+            writer.Close();
+            var jsonString = System.IO.File.ReadAllText("Product.json");
             dataNames = DescriptionOfTheDrug(jsonString, dataNames);
             
             return View(dataNames);

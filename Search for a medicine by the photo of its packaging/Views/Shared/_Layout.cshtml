@@ -1,4 +1,4 @@
-﻿@*@model Search_for_a_medicine_by_the_photo_of_its_packaging.Models.PhotoProcessing*@
+﻿@model Search_for_a_medicine_by_the_photo_of_its_packaging.Models.PhotoProcessing
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -144,8 +144,8 @@
                 <button id="id_of_button" class="button_line_search" type="submit" asp-controller="Home" asp-action="TextRecognising"></button>
 
                 <div class="input__wrapper">
-                    @*<input asp-for="PackingImage" name="PackingImage" type="file" id="input__file" accept="image/jpeg,image/png" class="input input__file" multiple>
-                    <label asp-for="PackingImage" for="input__file" class="input__file-button">*@
+                    <input asp-for="PackingImage" name="PackingImage" type="file" id="input__file" accept="image/jpeg,image/png" class="input input__file" multiple>
+                    <label asp-for="PackingImage" for="input__file" class="input__file-button">
                         <span class="input__file-icon-wrapper"><img class="input__file-icon" src="https://smartlanding.biz/demo/fileinput/img/add.svg" width="25"></span>
                         <span class="input__file-button-text">Выберите файл</span>
                     </label>

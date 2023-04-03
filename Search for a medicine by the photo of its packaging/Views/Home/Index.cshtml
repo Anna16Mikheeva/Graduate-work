@@ -5,7 +5,7 @@
 @if (Model != null)
 {
 <font color=#8B0000><h2>@Html.DisplayFor(modelItem => Model.NameDrugsRus) (@Html.DisplayFor(modelItem => Model.NameDrugsEng))</h2></font>
-<h3>Код АТХ:</h3>@Html.DisplayFor(modelItem => Model.AtcCode)
+<p><h3>Код АТХ:</h3>@Html.DisplayFor(modelItem => Model.AtcCode)</p>
 <p/><h3>Активные вещества и состав</h3>
     @for (int i = 0; i < Model.NameOfActiveSubstancesRus.Length;i++)
     {
