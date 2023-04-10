@@ -10,22 +10,16 @@ using Newtonsoft.Json;
 using System.Web;
 using System.IO;
 using Tesseract;
+using System;
+using System.Collections.Generic;
 
 namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly ILogger<HomeController> _logger;
-        //private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly PhotoProcessing image = new PhotoProcessing();
         private ViewModel viewModel = new ViewModel();
         private DataNames dataNames = new DataNames();
-
-        //public HomeController(ILogger<HomeController> logger, IWebHostEnvironment webHostEnvironment)
-        //{
-        //    _logger = logger;
-        //    _webHostEnvironment = webHostEnvironment;
-        //}
 
         public IActionResult Index()
         {
@@ -43,30 +37,32 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public ActionResult GetViewModel()
-        {
-            var db = new ViewModel();
-            var photoProcessing = db.PhotoProcessingView;
-            var dataNames = db.DataNamesView;
-            var model = new ViewModel { PhotoProcessingView = photoProcessing, DataNamesView = dataNames };
-            return View(model);
-        }
-
         [HttpPost]
-        public string TextRecognising(PhotoProcessing image)
+        public string[] TextRecognising(PhotoProcessing image)
         {
-            if (image.PackingImage != null)
+            List<string> toArray = new List<string>();
+            var ocrengine = new TesseractEngine(@".\tessdata", "rus+eng", EngineMode.Default);
+            var loadFromFile = Pix.LoadFromFile(image.PackingImage.FileName);
+            var v = Pix.LoadFromFile(image.PackingImage.FileName);
+            var process = ocrengine.Process(loadFromFile);
+            var textGhoto = process.GetText();
+            textGhoto = textGhoto.Replace("\n", " ");
+            string[] words = textGhoto.Split(' ');
+            //toArray = new List<string>(words);
+            for (int i = 0; i < words.Length; i++)
             {
-                var ocrengine = new TesseractEngine(@".\tessdata", "rus+eng", EngineMode.Default);
-                var loadFromFile = Pix.LoadFromFile(image.PackingImage.FileName);
-                var process = ocrengine.Process(loadFromFile);
-                var textGhoto = process.GetText();
-                return textGhoto;
+                if (words[i] != "" && words[i] != " " && words[i].Length != 0)
+                {
+                    toArray.Add(words[i]);
+                }
             }
-            else
-            {
-                return "Препарат не найден";
-            }
+            var wordsArray = toArray.ToArray();
+            return wordsArray;
+
+            //else
+            //{
+            //    return "Препарат не найден";
+            //}
         }
 
         public void Search(PhotoProcessing searchLine)
@@ -81,92 +77,81 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             var token = "aII4Hhj1EaeQ";
             var path = "Product.json";
             string search = null;
+            httpClient.DefaultRequestHeaders.Add("X-Token", token);
+
             if (viewModel.PhotoProcessingView.SearchLine != null)
             {
-                search = viewModel.PhotoProcessingView.SearchLine;
+                try
+                {
+                    json = await httpClient.GetStringAsync("http://www.vidal.ru/api/rest/v1/product/list?filter[name]=" + viewModel.PhotoProcessingView.SearchLine);
+                    search = viewModel.PhotoProcessingView.SearchLine;
+                    StreamWriter writer1 = new StreamWriter(path, false);
+                    writer1.WriteLine(json);
+                    writer1.Close();
+                    var jsonStrin = System.IO.File.ReadAllText("Product.json");
+                    var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonStrin);
+                    var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonStrin);
+                    if (rootobject.products.Length != 0)
+                    {
+                        search = viewModel.PhotoProcessingView.SearchLine;
+                    }
+                    else
+                    {
+                        viewModel.PhotoProcessingView.Error = "Препарат не найден";
+                    }
+                }
+                catch
+                {
+                    viewModel.PhotoProcessingView.Error = "Препарат не найден";
+                }
+                
             }
-            else if(viewModel.PhotoProcessingView.PackingImage !=null)
+            else if (viewModel.PhotoProcessingView.PackingImage != null)
             {
-                search = TextRecognising(viewModel.PhotoProcessingView);
+                var s = TextRecognising(viewModel.PhotoProcessingView);
+                for (int i = 0; i < s.Length; i++)
+                {
+                    try
+                    {
+                        json = await httpClient.GetStringAsync("http://www.vidal.ru/api/rest/v1/product/list?filter[name]=" + s[i]);
+                        StreamWriter writer1 = new StreamWriter(path, false);
+                        writer1.WriteLine(json);
+                        writer1.Close();
+                        var jsonStrin = System.IO.File.ReadAllText("Product.json");
+                        var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonStrin);
+                        var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonStrin);
+                        if (rootobject.products.Length != 0)
+                        {
+                            search = s[i];
+                            break;
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                if(search == null)
+                {
+                    viewModel.PhotoProcessingView.Error = "Препарат не найден";
+                }
             }
-            httpClient.DefaultRequestHeaders.Add("X-Token", token);
-            json = await httpClient.GetStringAsync("http://www.vidal.ru/api/rest/v1/product/list?filter[name]=" + search);
-            StreamWriter writer = new StreamWriter(path, false);
-            writer.WriteLine(json);
-            writer.Close();
-            var jsonString = System.IO.File.ReadAllText("Product.json");
-            viewModel.DataNamesView = DescriptionOfTheDrug(jsonString, dataNames);
-            return View("Privacy",viewModel);
-
-            //DataNames dataNames = new DataNames();
-            //ViewModel viewModel = new ViewModel();
-            //string search = null;
-            //if (viewModel.PhotoProcessingView.PackingImage != null)
-            //{
-            //    search = TextRecognising(viewModel.PhotoProcessingView);
-            //}
-            //else if (viewModel.PhotoProcessingView.SearchLine != null)
-            //{
-            //    search = viewModel.PhotoProcessingView.SearchLine;
-            //}
-            //string json;
-            //string token = "aII4Hhj1EaeQ";
-            //string path = "Product.json";
-            //using var httpClient = new HttpClient();
-            //httpClient.DefaultRequestHeaders.Add("X-Token", token);
-            //json = await httpClient.GetStringAsync(@"http://www.vidal.ru/api/rest/v1/product/list?filter[name]=" + search);
-            //StreamWriter writer = new StreamWriter(path, false);
-            //writer.WriteLine(json);
-            //writer.Close();
-            //var jsonString = System.IO.File.ReadAllText("Product.json");
-            //dataNames = DescriptionOfTheDrug(jsonString, dataNames);
-            //viewModel.DataNamesView = dataNames;
-
-            //return View("Privacy", viewModel);
+            if (viewModel.PhotoProcessingView.Error != "Препарат не найден")
+            {
+                json = await httpClient.GetStringAsync("http://www.vidal.ru/api/rest/v1/product/list?filter[name]=" + search);
+                StreamWriter writer = new StreamWriter(path, false);
+                writer.WriteLine(json);
+                writer.Close();
+                var jsonString = System.IO.File.ReadAllText("Product.json");
+                viewModel.DataNamesView = DescriptionOfTheDrug(jsonString, dataNames);
+                return View("Privacy", viewModel);
+            }
+            return View("Index", viewModel);
         }
 
         public async Task<ActionResult> Privacy()
         {
-            //DataNames dataNames = new DataNames();
-            //ViewModel viewModel = new ViewModel();
-            //string search = null;
-            //if (viewModel.PhotoProcessingView.PackingImage != null)
-            //{
-            //    search = TextRecognising(viewModel.PhotoProcessingView);
-            //}
-            //else if (viewModel.PhotoProcessingView.SearchLine != null)
-            //{
-            //    search = viewModel.PhotoProcessingView.SearchLine;
-            //}
-            //string json;
-            //string token = "aII4Hhj1EaeQ";
-            //string path = "Product.json";
-            //using var httpClient = new HttpClient();
-            //httpClient.DefaultRequestHeaders.Add("X-Token", token);
-            //json = await httpClient.GetStringAsync(@"http://www.vidal.ru/api/rest/v1/product/list?filter[name]=" + search);
-            //StreamWriter writer = new StreamWriter(path, false);
-            //writer.WriteLine(json);
-            //writer.Close();
-            //var jsonString = System.IO.File.ReadAllText("Product.json");
-            //dataNames = DescriptionOfTheDrug(jsonString, dataNames);
-            //viewModel.DataNamesView = dataNames;
-
-            //return View(viewModel);
-
-            
-            using var httpClient = new HttpClient();
-            string json;
-            string token = "aII4Hhj1EaeQ";
-            string path = "Product.json";
-            httpClient.DefaultRequestHeaders.Add("X-Token", token);
-            json = await httpClient.GetStringAsync(@"http://www.vidal.ru/api/rest/v1/product/list?filter[name]=" + viewModel.PhotoProcessingView.SearchLine);
-            StreamWriter writer = new StreamWriter(path, false);
-            writer.WriteLine(json);
-            writer.Close();
-            var jsonString = System.IO.File.ReadAllText("Product.json");
-            dataNames = DescriptionOfTheDrug(jsonString, dataNames);
-            viewModel.DataNamesView = dataNames;
-            return View(viewModel);
+            return View();
         }
 
 

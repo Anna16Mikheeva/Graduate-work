@@ -10,5 +10,6 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Models
     {
         public IFormFile PackingImage { get; set; }
         public string SearchLine { get; set; }
+        public string Error { get; set; }
     }
 }
