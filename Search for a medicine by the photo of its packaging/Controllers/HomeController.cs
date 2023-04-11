@@ -17,26 +17,63 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly PhotoProcessing image = new PhotoProcessing();
+        /// <summary>
+        /// Экземпляр класса PhotoProcessing
+        /// </summary>
+        private PhotoProcessing image = new PhotoProcessing();
+
+        /// <summary>
+        /// Экземпляр класса ViewModel
+        /// </summary>
         private ViewModel viewModel = new ViewModel();
+
+        /// <summary>
+        /// Экземпляр класса DataNames
+        /// </summary>
         private DataNames dataNames = new DataNames();
 
+        /// <summary>
+        /// Возвращает главную страницу Index
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();
         }
 
-        //public IActionResult Privacy()
-        //{
-        //    return View();
-        //}
+        /// <summary>
+        /// Возвращает старницу Privacy
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ActionResult> Privacy()
+        {
+            return View();
+        }
 
+        /// <summary>
+        /// Возвращает страницу BarCode
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult BarCode()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Возвращает ошибку
+        /// </summary>
+        /// <returns></returns>
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        /// <summary>
+        /// Распознает текст на фотографии
+        /// </summary>
+        /// <param name="image"></param>
+        /// <returns></returns>
         [HttpPost]
         public string[] TextRecognising(PhotoProcessing image)
         {
@@ -48,7 +85,6 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             var textGhoto = process.GetText();
             textGhoto = textGhoto.Replace("\n", " ");
             string[] words = textGhoto.Split(' ');
-            //toArray = new List<string>(words);
             for (int i = 0; i < words.Length; i++)
             {
                 if (words[i] != "" && words[i] != " " && words[i].Length != 0)
@@ -57,19 +93,15 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                 }
             }
             var wordsArray = toArray.ToArray();
+
             return wordsArray;
-
-            //else
-            //{
-            //    return "Препарат не найден";
-            //}
         }
 
-        public void Search(PhotoProcessing searchLine)
-        {
-
-        }
-
+        /// <summary>
+        /// Обрабатывает запрос и выводит информацию о лекарстве
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         public async Task<ActionResult> ApiVidal(ViewModel viewModel)
         {
             using var httpClient = new HttpClient();
@@ -79,7 +111,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             string search = null;
             httpClient.DefaultRequestHeaders.Add("X-Token", token);
 
-            if (viewModel.PhotoProcessingView.SearchLine != null)
+            if (viewModel.PhotoProcessingView.SearchLine != null && viewModel.PhotoProcessingView.SearchLine != "" && viewModel.PhotoProcessingView.SearchLine != " ")
             {
                 try
                 {
@@ -104,7 +136,6 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                 {
                     viewModel.PhotoProcessingView.Error = "Препарат не найден";
                 }
-                
             }
             else if (viewModel.PhotoProcessingView.PackingImage != null)
             {
@@ -131,11 +162,13 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
 
                     }
                 }
-                if(search == null)
-                {
-                    viewModel.PhotoProcessingView.Error = "Препарат не найден";
-                }
             }
+
+            if (search == null)
+            {
+                viewModel.PhotoProcessingView.Error = "Препарат не найден";
+            }
+
             if (viewModel.PhotoProcessingView.Error != "Препарат не найден")
             {
                 json = await httpClient.GetStringAsync("http://www.vidal.ru/api/rest/v1/product/list?filter[name]=" + search);
@@ -144,17 +177,12 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                 writer.Close();
                 var jsonString = System.IO.File.ReadAllText("Product.json");
                 viewModel.DataNamesView = DescriptionOfTheDrug(jsonString, dataNames);
+
                 return View("Privacy", viewModel);
             }
+
             return View("Index", viewModel);
         }
-
-        public async Task<ActionResult> Privacy()
-        {
-            return View();
-        }
-
-
 
         /// <summary>
         /// Описание препарата
