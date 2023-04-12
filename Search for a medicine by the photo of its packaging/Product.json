@@ -1,1 +1,973 @@
-{"success":true,"products":[],"pagination":{"page":1,"limit":5,"pageCount":0,"itemsCount":0,"totalItemsCount":0}}
+{
+  "success": true,
+  "products": [
+    {
+      "atcCodes": [
+        {
+          "code": "D08AF01",
+          "rusName": "Нитрофурал",
+          "engName": "Nitrofural",
+          "parentCode": "D08AF"
+        }
+      ],
+      "ClPhGroups": [ { "name": "Антибактериальный и противопротозойный препарат для наружного и местного применения. Производное нитрофурана" } ],
+      "companies": [
+        {
+          "isRegistrationCertificate": true,
+          "isManufacturer": false,
+          "company": {
+            "name": "ЯРОСЛАВСКАЯ ФАРМАЦЕВТИЧЕСКАЯ ФАБРИКА",
+            "GDDBName": "YAROSLAVSKAYA PHARMACEVTICHESKAYA FABRIKA ZAO",
+            "country": {
+              "code": "RUS",
+              "rusName": "Россия"
+            }
+          },
+          "companyRusNote": null
+        }
+      ],
+      "composition": "<TABLE width=\"100%\" border=\"1\">\n<TR>\n<TD> <I><B>Мазь для местного и наружного применения 0.2%</B></I></TD>\n<TD><B>100 г</B></TD></TR>\n<TR>\n<TD>нитрофурал</TD>\n<TD>200 мкг</TD></TR></TABLE>\n<P>25 г - банки темного стекла (1) - пачки картонные.</P>",
+      "dateOfCloseRegistration": "",
+      "dateOfReRegistration": null,
+      "document": {
+        "storageCondition": null,
+        "storageTime": "",
+        "updatedAt": "2020-10-19T12:07:30+03:00",
+        "nozologies": [
+          {
+            "code": "H01.0",
+            "name": "Блефарит"
+          },
+          {
+            "code": "H10..",
+            "name": "Конъюнктивит"
+          },
+          {
+            "code": "J01..",
+            "name": "Острый синусит"
+          },
+          {
+            "code": "J03..",
+            "name": "Острый тонзиллит"
+          },
+          {
+            "code": "J86..",
+            "name": "Пиоторакс (эмпиема плевры)"
+          },
+          {
+            "code": "K05..",
+            "name": "Гингивит и болезни пародонта"
+          },
+          {
+            "code": "K12..",
+            "name": "Стоматит и родственные поражения"
+          },
+          {
+            "code": "L89..",
+            "name": "Декубитальная язва и область давления"
+          },
+          {
+            "code": "L98.4",
+            "name": "Хроническая язва кожи, не классифицированная в других рубриках"
+          },
+          {
+            "code": "M86..",
+            "name": "Остеомиелит"
+          },
+          {
+            "code": "N30..",
+            "name": "Цистит"
+          },
+          {
+            "code": "N34..",
+            "name": "Уретрит и уретральный синдром"
+          },
+          {
+            "code": "T14.0",
+            "name": "Поверхностная травма неуточненной области тела (в т.ч. ссадина, кровоподтек, ушиб, гематома, укус неядовитого насекомого)"
+          },
+          {
+            "code": "T30..",
+            "name": "Термические и химические ожоги неуточненной локализации"
+          },
+          {
+            "code": "T79.3",
+            "name": "Посттравматическая раневая инфекция, не классифицированная в других рубриках"
+          }
+        ],
+        "clphPointers": [
+          {
+            "id": 16919,
+            "code": "06.20.03",
+            "name": "Производные нитрофурана для наружного применения"
+          },
+          {
+            "id": 17881,
+            "code": "29.01.04",
+            "name": "Производные нитрофурана"
+          }
+        ],
+        "documentId": 1986,
+        "articleId": 1,
+        "yearEdition": "0",
+        "phInfluence": "Противомикробное средство, производное нитрофурана. Активен в отношении грамположительных бактерий: Staphylococcus spp., Streptococcus spp., Bacillus anthracis; грамотрицательных бактерий: Escherichia coli, Shigella spp., Salmonella spp. (в т.ч. Salmonella paratyphi).",
+        "phKinetics": "При местном и наружном применении всасывание незначительное. Проникает через гистогематические барьеры и равномерно распределяется в жидкостях и тканях. Основной путь метаболизма - восстановление нитрогруппы. Выводится с мочой и частично с калом.",
+        "dosage": "<P>Применяют наружно и местно. Дозу, способ и схему применения, длительность терапии определяют индивидуально, в зависимости от показаний, клинической ситуации и применяемой лекарственной формы.</P>",
+        "overDosage": null,
+        "interaction": null,
+        "lactation": "<P>При беременности и в период грудного вскармливания возможно применение по показаниям в тех случаях, когда предполагаемая польза для матери превышает потенциальный риск для плода или младенца.</P>",
+        "sideEffects": "<I>Возможно:</I> местные аллергические реакции, дерматиты.",
+        "indication": "<P>Для наружного применения: гнойные раны, пролежни, ожоги II-III степени, мелкие повреждения кожи (в т.ч. ссадины, царапины, трещины, порезы). </P><P>Для местного применения: острый наружный и средний отит, тонзиллит, стоматит, гингивит; остеомиелит, эмпиема придаточных пазух носа и плевры, инфекции мочевыводящих путей.</P>",
+        "contraIndication": "Повышенная чувствительность к нитрофуралу и другим производным нитрофурана; кровотечение, аллергодерматозы, выраженные нарушения функции почек.",
+        "specialInstruction": "<P>Если после лечения улучшение не наступает или симптомы усугубляются, или появляются новые симптомы, необходимо проконсультироваться с врачом. </P><P>Применять средство следует строго согласно тем показаниям, тому способу применения, которые указаны в инструкции по применению конкретной лекарственной формы.</P>",
+        "pregnancyUsing": "Care",
+        "nursingUsing": "Care",
+        "renalInsuf": "Противопоказан к применению при выраженных нарушениях функции почек.",
+        "renalInsufUsing": "Care",
+        "hepatoInsuf": null,
+        "hepatoInsufUsing": "Qwes",
+        "pharmDelivery": null,
+        "elderlyInsuf": null,
+        "elderlyInsufUsing": null,
+        "childInsuf": null,
+        "childInsufUsing": null
+      },
+      "engName": "Furacilin",
+      "forms": null,
+      "gnvls": false,
+      "id": 21155,
+      "images": [ "/upload/products/21405-furacilin-maz-yaroslavl.jpg" ],
+      "infoPages": [],
+      "isValid": true,
+      "listPkkn": null,
+      "marketStatus": {
+        "id": 2,
+        "rusName": "Бессрочно"
+      },
+      "moleculeNames": [
+        {
+          "id": 3093,
+          "molecule": {
+            "id": 750,
+            "latName": "nitrofural",
+            "originalLatName": "nitrofuralum",
+            "rusName": "нитрофурал",
+            "GNParent": {
+              "GNParent": "Rec.INN",
+              "description": "зарегистрированное ВОЗ"
+            },
+            "documents": [
+              {
+                "documentId": 1986,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 28710,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 46194,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 46216,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 48686,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 51547,
+                "moleculeId": 750
+              }
+            ],
+            "moleculeNames": []
+          },
+          "rusName": "нитрофурал",
+          "engName": "nitrofural"
+        }
+      ],
+      "nonPrescriptionDrug": true,
+      "phthgroups": [ { "code": "Противомикробное средство, нитрофуран" } ],
+      "poison": false,
+      "productPackages": [],
+      "productTypeCode": "DRUG",
+      "productUrl": "https://www.vidal.ru/drugs/furacilin__21155",
+      "registrationDate": "10.03.09",
+      "registrationNumber": "ЛСР-001754/09",
+      "regPreviousNumber": null,
+      "rusName": "Фурацилин",
+      "strongMeans": false,
+      "updatedAt": "2017-12-05T16:27:16+03:00",
+      "zipInfo": " мазь д/местн. и наружн. прим. 0.2%: банка 25 г"
+    },
+    {
+      "infoPages": [],
+      "atcCodes": [
+        {
+          "code": "D08AF01",
+          "rusName": "Нитрофурал",
+          "engName": "Nitrofural",
+          "parentCode": "D08AF"
+        }
+      ],
+      "phthgroups": [ { "code": "Противомикробное средство, нитрофуран" } ],
+      "ClPhGroups": [ { "name": "Антибактериальный и противопротозойный препарат для наружного и местного применения. Производное нитрофурана" } ],
+      "updatedAt": "2010-05-30T00:00:00+04:00",
+      "isValid": true,
+      "productUrl": "https://www.vidal.ru/drugs/furacilin__23857",
+      "images": [],
+      "moleculeNames": [
+        {
+          "id": 3093,
+          "molecule": {
+            "id": 750,
+            "latName": "nitrofural",
+            "originalLatName": "nitrofuralum",
+            "rusName": "нитрофурал",
+            "GNParent": {
+              "GNParent": "Rec.INN",
+              "description": "зарегистрированное ВОЗ"
+            },
+            "documents": [
+              {
+                "documentId": 1986,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 28710,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 46194,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 46216,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 48686,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 51547,
+                "moleculeId": 750
+              }
+            ],
+            "moleculeNames": []
+          },
+          "rusName": "нитрофурал",
+          "engName": "nitrofural"
+        }
+      ],
+      "id": 23857,
+      "rusName": "Фурацилин",
+      "engName": "Furacilin",
+      "nonPrescriptionDrug": true,
+      "registrationDate": "18.02.10",
+      "dateOfCloseRegistration": "",
+      "registrationNumber": "ЛСР-001149/10",
+      "zipInfo": " р-р д/местн. и наружн. прим. 0.02%: бут. 200 мл 1 или 28 шт., бут. 400 мл 1 или 15 шт.",
+      "composition": "<TABLE width=\"100%\" border=\"1\">\n<TR>\n<TD> <I><B>Раствор для местного и наружного применения 0.02%</B></I></TD>\n<TD><B>1 л</B></TD></TR>\n<TR>\n<TD>нитрофурал</TD>\n<TD>200 мг</TD></TR></TABLE>\n<P>200 мл - бутылки для крови и кровезаменителей (1) - пачки картонные.<BR />400 мл - бутылки для крови и кровезаменителей (1) - пачки картонные.<BR />200 мл - бутылки для крови и кровезаменителей (28) - ящики картонные.<BR />400 мл - бутылки для крови и кровезаменителей (15) - ящики картонные.</P>",
+      "productTypeCode": "DRUG",
+      "marketStatus": {
+        "id": 2,
+        "rusName": "Бессрочно"
+      },
+      "dateOfReRegistration": null,
+      "gnvls": false,
+      "listPkkn": null,
+      "strongMeans": false,
+      "poison": false,
+      "companies": [
+        {
+          "isRegistrationCertificate": true,
+          "isManufacturer": false,
+          "company": {
+            "name": "ДАЛЬХИМФАРМ",
+            "GDDBName": "DALCHIMPHARM OAO",
+            "country": {
+              "code": "RUS",
+              "rusName": "Россия"
+            }
+          },
+          "companyRusNote": null
+        }
+      ],
+      "document": {
+        "storageCondition": null,
+        "storageTime": "",
+        "updatedAt": "2020-10-19T12:07:30+03:00",
+        "nozologies": [
+          {
+            "code": "H01.0",
+            "name": "Блефарит"
+          },
+          {
+            "code": "H10..",
+            "name": "Конъюнктивит"
+          },
+          {
+            "code": "J01..",
+            "name": "Острый синусит"
+          },
+          {
+            "code": "J03..",
+            "name": "Острый тонзиллит"
+          },
+          {
+            "code": "J86..",
+            "name": "Пиоторакс (эмпиема плевры)"
+          },
+          {
+            "code": "K05..",
+            "name": "Гингивит и болезни пародонта"
+          },
+          {
+            "code": "K12..",
+            "name": "Стоматит и родственные поражения"
+          },
+          {
+            "code": "L89..",
+            "name": "Декубитальная язва и область давления"
+          },
+          {
+            "code": "L98.4",
+            "name": "Хроническая язва кожи, не классифицированная в других рубриках"
+          },
+          {
+            "code": "M86..",
+            "name": "Остеомиелит"
+          },
+          {
+            "code": "N30..",
+            "name": "Цистит"
+          },
+          {
+            "code": "N34..",
+            "name": "Уретрит и уретральный синдром"
+          },
+          {
+            "code": "T14.0",
+            "name": "Поверхностная травма неуточненной области тела (в т.ч. ссадина, кровоподтек, ушиб, гематома, укус неядовитого насекомого)"
+          },
+          {
+            "code": "T30..",
+            "name": "Термические и химические ожоги неуточненной локализации"
+          },
+          {
+            "code": "T79.3",
+            "name": "Посттравматическая раневая инфекция, не классифицированная в других рубриках"
+          }
+        ],
+        "clphPointers": [
+          {
+            "id": 16919,
+            "code": "06.20.03",
+            "name": "Производные нитрофурана для наружного применения"
+          },
+          {
+            "id": 17881,
+            "code": "29.01.04",
+            "name": "Производные нитрофурана"
+          }
+        ],
+        "documentId": 1986,
+        "articleId": 1,
+        "yearEdition": "0",
+        "phInfluence": "Противомикробное средство, производное нитрофурана. Активен в отношении грамположительных бактерий: Staphylococcus spp., Streptococcus spp., Bacillus anthracis; грамотрицательных бактерий: Escherichia coli, Shigella spp., Salmonella spp. (в т.ч. Salmonella paratyphi).",
+        "phKinetics": "При местном и наружном применении всасывание незначительное. Проникает через гистогематические барьеры и равномерно распределяется в жидкостях и тканях. Основной путь метаболизма - восстановление нитрогруппы. Выводится с мочой и частично с калом.",
+        "dosage": "<P>Применяют наружно и местно. Дозу, способ и схему применения, длительность терапии определяют индивидуально, в зависимости от показаний, клинической ситуации и применяемой лекарственной формы.</P>",
+        "overDosage": null,
+        "interaction": null,
+        "lactation": "<P>При беременности и в период грудного вскармливания возможно применение по показаниям в тех случаях, когда предполагаемая польза для матери превышает потенциальный риск для плода или младенца.</P>",
+        "sideEffects": "<I>Возможно:</I> местные аллергические реакции, дерматиты.",
+        "indication": "<P>Для наружного применения: гнойные раны, пролежни, ожоги II-III степени, мелкие повреждения кожи (в т.ч. ссадины, царапины, трещины, порезы). </P><P>Для местного применения: острый наружный и средний отит, тонзиллит, стоматит, гингивит; остеомиелит, эмпиема придаточных пазух носа и плевры, инфекции мочевыводящих путей.</P>",
+        "contraIndication": "Повышенная чувствительность к нитрофуралу и другим производным нитрофурана; кровотечение, аллергодерматозы, выраженные нарушения функции почек.",
+        "specialInstruction": "<P>Если после лечения улучшение не наступает или симптомы усугубляются, или появляются новые симптомы, необходимо проконсультироваться с врачом. </P><P>Применять средство следует строго согласно тем показаниям, тому способу применения, которые указаны в инструкции по применению конкретной лекарственной формы.</P>",
+        "pregnancyUsing": "Care",
+        "nursingUsing": "Care",
+        "renalInsuf": "Противопоказан к применению при выраженных нарушениях функции почек.",
+        "renalInsufUsing": "Care",
+        "hepatoInsuf": null,
+        "hepatoInsufUsing": "Qwes",
+        "pharmDelivery": null,
+        "elderlyInsuf": null,
+        "elderlyInsufUsing": null,
+        "childInsuf": null,
+        "childInsufUsing": null
+      },
+      "forms": null,
+      "productPackages": [],
+      "regPreviousNumber": null
+    },
+    {
+      "infoPages": [],
+      "atcCodes": [
+        {
+          "code": "D08AF01",
+          "rusName": "Нитрофурал",
+          "engName": "Nitrofural",
+          "parentCode": "D08AF"
+        }
+      ],
+      "phthgroups": [ { "code": "Противомикробное средство, нитрофуран" } ],
+      "ClPhGroups": [ { "name": "Антибактериальный и противопротозойный препарат для наружного и местного применения. Производное нитрофурана" } ],
+      "updatedAt": "2020-10-15T17:02:27+03:00",
+      "isValid": true,
+      "productUrl": "https://www.vidal.ru/drugs/furacilin__18326",
+      "images": [],
+      "moleculeNames": [
+        {
+          "id": 3093,
+          "molecule": {
+            "id": 750,
+            "latName": "nitrofural",
+            "originalLatName": "nitrofuralum",
+            "rusName": "нитрофурал",
+            "GNParent": {
+              "GNParent": "Rec.INN",
+              "description": "зарегистрированное ВОЗ"
+            },
+            "documents": [
+              {
+                "documentId": 1986,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 28710,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 46194,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 46216,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 48686,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 51547,
+                "moleculeId": 750
+              }
+            ],
+            "moleculeNames": []
+          },
+          "rusName": "нитрофурал",
+          "engName": "nitrofural"
+        }
+      ],
+      "id": 18326,
+      "rusName": "Фурацилин",
+      "engName": "Furacilin",
+      "nonPrescriptionDrug": true,
+      "registrationDate": "18.03.08",
+      "dateOfCloseRegistration": "",
+      "registrationNumber": "ЛСР-001921/08",
+      "zipInfo": " р-р д/местн. и наружн. прим. спиртовой 0.067%: фл. 10 мл или 25 мл",
+      "composition": "<TABLE width=\"100%\" border=\"1\">\n<TR>\n<TD> <I><B>Раствор для местного и наружного применения спиртовой 0.067%</B></I></TD>\n<TD><B>100 мл</B></TD></TR>\n<TR>\n<TD>нитрофурал</TD>\n<TD>67 мг</TD></TR></TABLE>\n<P>10 мл - флаконы темного стекла (1) - пачки картонные.<BR />25 мл - флаконы темного стекла (1) - пачки картонные.</P>",
+      "productTypeCode": "DRUG",
+      "marketStatus": {
+        "id": 2,
+        "rusName": "Бессрочно"
+      },
+      "dateOfReRegistration": null,
+      "gnvls": false,
+      "listPkkn": null,
+      "strongMeans": false,
+      "poison": false,
+      "companies": [
+        {
+          "isRegistrationCertificate": true,
+          "isManufacturer": false,
+          "company": {
+            "name": "АПТЕКА ФАРМИКОН",
+            "GDDBName": "APTEKA PHARMIKON",
+            "country": {
+              "code": "RUS",
+              "rusName": "Россия"
+            }
+          },
+          "companyRusNote": null
+        }
+      ],
+      "document": {
+        "storageCondition": "<P>Хранить препарат в защищенном от света месте при температуре не выше 25&deg;С. Хранить в недоступном для детей месте.</P><P>",
+        "storageTime": "Срок годности - 2 года. Не использовать позже срока, указанного на упаковке.</P>",
+        "updatedAt": "2019-12-20T13:12:39+03:00",
+        "nozologies": [
+          {
+            "code": "H60..",
+            "name": "Наружный отит"
+          },
+          {
+            "code": "H66..",
+            "name": "Гнойный и неуточненный средний отит"
+          },
+          {
+            "code": "L89..",
+            "name": "Декубитальная язва и область давления"
+          },
+          {
+            "code": "T79.3",
+            "name": "Посттравматическая раневая инфекция, не классифицированная в других рубриках"
+          }
+        ],
+        "clphPointers": [
+          {
+            "id": 16919,
+            "code": "06.20.03",
+            "name": "Производные нитрофурана для наружного применения"
+          },
+          {
+            "id": 16920,
+            "code": "06.20.04",
+            "name": "Производные нитрофурана для местного применения"
+          }
+        ],
+        "documentId": 28710,
+        "articleId": 5,
+        "yearEdition": "2011",
+        "phInfluence": "<P>Противомикробное средство. Обладает отличным от других химиотерапевтических средств механизмом действия: микробные флавопротеины, восстанавливая 5-нитрогруппу, образуют высокореактивные аминопроизводные, способные вызывать конформационные изменения белков (в т.ч. рибосомальных) и других макромолекул, приводя к гибели клеток. </P><P><I>Активен в отношении грамположительных и грамотрицательных бактерий</I> (Staphylococcus spp., Streptococcus spp., Shigella dysenteria, Shigella flexneri, Shigella boydii, Shigella sonnei, Escherichia coli, Clostridium perfringens, Salmonella spp.).</P><P>Устойчивость развивается медленно и не достигает высокой степени. Увеличивает активность ретикуло-эндотелиальной системы (РЭС), усиливает фагоцитоз.</P>",
+        "phKinetics": null,
+        "dosage": "<P>Наружно, в виде спиртового раствора 0.067% (1:1500) - орошают раны и накладывают влажные повязки.</P><P>При <I>отитах</I> - спиртовой раствор, нагретый до температуры тела, ежедневно закапывается по 5-6 капель в наружный слуховой проход.</P>",
+        "overDosage": null,
+        "interaction": null,
+        "lactation": null,
+        "sideEffects": "<P>Аллергические реакции, дерматит.</P>",
+        "indication": "<UL><LI>гнойные раны;</LI><LI>пролежни;</LI><LI>острый наружный и средний отит.</LI></UL>",
+        "contraIndication": "<UL><LI>кровотечение;</LI><LI>аллергодерматозы;</LI><LI>повышенная чувствительность.</LI></UL>",
+        "specialInstruction": null,
+        "pregnancyUsing": "Qwes",
+        "nursingUsing": "Qwes",
+        "renalInsuf": null,
+        "renalInsufUsing": "Qwes",
+        "hepatoInsuf": null,
+        "hepatoInsufUsing": "Qwes",
+        "pharmDelivery": "Препарат разрешен к применению в качестве средства безрецептурного отпуска.",
+        "elderlyInsuf": null,
+        "elderlyInsufUsing": null,
+        "childInsuf": null,
+        "childInsufUsing": null
+      },
+      "forms": null,
+      "productPackages": [],
+      "regPreviousNumber": null
+    },
+    {
+      "infoPages": [],
+      "atcCodes": [
+        {
+          "code": "D08AF01",
+          "rusName": "Нитрофурал",
+          "engName": "Nitrofural",
+          "parentCode": "D08AF"
+        }
+      ],
+      "phthgroups": [ { "code": "Противомикробное средство, нитрофуран" } ],
+      "ClPhGroups": [ { "name": "Антибактериальный и противопротозойный препарат для наружного и местного применения. Производное нитрофурана" } ],
+      "updatedAt": "2017-12-05T17:11:37+03:00",
+      "isValid": true,
+      "productUrl": "https://www.vidal.ru/drugs/furacilin__18756",
+      "images": [],
+      "moleculeNames": [
+        {
+          "id": 3093,
+          "molecule": {
+            "id": 750,
+            "latName": "nitrofural",
+            "originalLatName": "nitrofuralum",
+            "rusName": "нитрофурал",
+            "GNParent": {
+              "GNParent": "Rec.INN",
+              "description": "зарегистрированное ВОЗ"
+            },
+            "documents": [
+              {
+                "documentId": 1986,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 28710,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 46194,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 46216,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 48686,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 51547,
+                "moleculeId": 750
+              }
+            ],
+            "moleculeNames": []
+          },
+          "rusName": "нитрофурал",
+          "engName": "nitrofural"
+        }
+      ],
+      "id": 18756,
+      "rusName": "Фурацилин",
+      "engName": "Furacilin",
+      "nonPrescriptionDrug": true,
+      "registrationDate": "23.05.08",
+      "dateOfCloseRegistration": "",
+      "registrationNumber": "Р N002885/01",
+      "zipInfo": " таб. д/пригот. р-ра д/местн. прим. 20 мг: 10 шт.",
+      "composition": "<P> <I><B>Таблетки для приготовления раствора для местного и наружного применения</B></I> желтого или зеленовато-желтого цвета с неравномерной окраской поверхности, плоскоцилиндрические, с риской.</P>\n<TABLE width=\"100%\" border=\"1\">\n<TR>\n<TD></TD>\n<TD><B>1 таб.</B></TD></TR>\n<TR>\n<TD>нитрофурал</TD>\n<TD>20 мг</TD></TR></TABLE>\n<P><i class\"pring\">Вспомогательные вещества</i>: натрия хлорид - 0.8 г.</P>\n<P>10 шт. - упаковки безъячейковые контурные.<BR />10 шт. - упаковки ячейковые контурные.</P>",
+      "productTypeCode": "DRUG",
+      "marketStatus": {
+        "id": 2,
+        "rusName": "Бессрочно"
+      },
+      "dateOfReRegistration": "18.05.12",
+      "gnvls": false,
+      "listPkkn": null,
+      "strongMeans": false,
+      "poison": false,
+      "companies": [
+        {
+          "isRegistrationCertificate": true,
+          "isManufacturer": false,
+          "company": {
+            "name": "ДАЛЬХИМФАРМ",
+            "GDDBName": "DALCHIMPHARM OAO",
+            "country": {
+              "code": "RUS",
+              "rusName": "Россия"
+            }
+          },
+          "companyRusNote": null
+        }
+      ],
+      "document": {
+        "storageCondition": null,
+        "storageTime": "",
+        "updatedAt": "2020-10-19T12:07:30+03:00",
+        "nozologies": [
+          {
+            "code": "H01.0",
+            "name": "Блефарит"
+          },
+          {
+            "code": "H10..",
+            "name": "Конъюнктивит"
+          },
+          {
+            "code": "J01..",
+            "name": "Острый синусит"
+          },
+          {
+            "code": "J03..",
+            "name": "Острый тонзиллит"
+          },
+          {
+            "code": "J86..",
+            "name": "Пиоторакс (эмпиема плевры)"
+          },
+          {
+            "code": "K05..",
+            "name": "Гингивит и болезни пародонта"
+          },
+          {
+            "code": "K12..",
+            "name": "Стоматит и родственные поражения"
+          },
+          {
+            "code": "L89..",
+            "name": "Декубитальная язва и область давления"
+          },
+          {
+            "code": "L98.4",
+            "name": "Хроническая язва кожи, не классифицированная в других рубриках"
+          },
+          {
+            "code": "M86..",
+            "name": "Остеомиелит"
+          },
+          {
+            "code": "N30..",
+            "name": "Цистит"
+          },
+          {
+            "code": "N34..",
+            "name": "Уретрит и уретральный синдром"
+          },
+          {
+            "code": "T14.0",
+            "name": "Поверхностная травма неуточненной области тела (в т.ч. ссадина, кровоподтек, ушиб, гематома, укус неядовитого насекомого)"
+          },
+          {
+            "code": "T30..",
+            "name": "Термические и химические ожоги неуточненной локализации"
+          },
+          {
+            "code": "T79.3",
+            "name": "Посттравматическая раневая инфекция, не классифицированная в других рубриках"
+          }
+        ],
+        "clphPointers": [
+          {
+            "id": 16919,
+            "code": "06.20.03",
+            "name": "Производные нитрофурана для наружного применения"
+          },
+          {
+            "id": 17881,
+            "code": "29.01.04",
+            "name": "Производные нитрофурана"
+          }
+        ],
+        "documentId": 1986,
+        "articleId": 1,
+        "yearEdition": "0",
+        "phInfluence": "Противомикробное средство, производное нитрофурана. Активен в отношении грамположительных бактерий: Staphylococcus spp., Streptococcus spp., Bacillus anthracis; грамотрицательных бактерий: Escherichia coli, Shigella spp., Salmonella spp. (в т.ч. Salmonella paratyphi).",
+        "phKinetics": "При местном и наружном применении всасывание незначительное. Проникает через гистогематические барьеры и равномерно распределяется в жидкостях и тканях. Основной путь метаболизма - восстановление нитрогруппы. Выводится с мочой и частично с калом.",
+        "dosage": "<P>Применяют наружно и местно. Дозу, способ и схему применения, длительность терапии определяют индивидуально, в зависимости от показаний, клинической ситуации и применяемой лекарственной формы.</P>",
+        "overDosage": null,
+        "interaction": null,
+        "lactation": "<P>При беременности и в период грудного вскармливания возможно применение по показаниям в тех случаях, когда предполагаемая польза для матери превышает потенциальный риск для плода или младенца.</P>",
+        "sideEffects": "<I>Возможно:</I> местные аллергические реакции, дерматиты.",
+        "indication": "<P>Для наружного применения: гнойные раны, пролежни, ожоги II-III степени, мелкие повреждения кожи (в т.ч. ссадины, царапины, трещины, порезы). </P><P>Для местного применения: острый наружный и средний отит, тонзиллит, стоматит, гингивит; остеомиелит, эмпиема придаточных пазух носа и плевры, инфекции мочевыводящих путей.</P>",
+        "contraIndication": "Повышенная чувствительность к нитрофуралу и другим производным нитрофурана; кровотечение, аллергодерматозы, выраженные нарушения функции почек.",
+        "specialInstruction": "<P>Если после лечения улучшение не наступает или симптомы усугубляются, или появляются новые симптомы, необходимо проконсультироваться с врачом. </P><P>Применять средство следует строго согласно тем показаниям, тому способу применения, которые указаны в инструкции по применению конкретной лекарственной формы.</P>",
+        "pregnancyUsing": "Care",
+        "nursingUsing": "Care",
+        "renalInsuf": "Противопоказан к применению при выраженных нарушениях функции почек.",
+        "renalInsufUsing": "Care",
+        "hepatoInsuf": null,
+        "hepatoInsufUsing": "Qwes",
+        "pharmDelivery": null,
+        "elderlyInsuf": null,
+        "elderlyInsufUsing": null,
+        "childInsuf": null,
+        "childInsufUsing": null
+      },
+      "forms": null,
+      "productPackages": [],
+      "regPreviousNumber": null
+    },
+    {
+      "infoPages": [],
+      "atcCodes": [
+        {
+          "code": "D08AF01",
+          "rusName": "Нитрофурал",
+          "engName": "Nitrofural",
+          "parentCode": "D08AF"
+        }
+      ],
+      "phthgroups": [ { "code": "Противомикробное средство, нитрофуран" } ],
+      "ClPhGroups": [ { "name": "Антибактериальный и противопротозойный препарат для наружного и местного применения. Производное нитрофурана" } ],
+      "updatedAt": "2020-11-30T19:48:14+03:00",
+      "isValid": true,
+      "productUrl": "https://www.vidal.ru/drugs/furacilin__10624",
+      "images": [],
+      "moleculeNames": [
+        {
+          "id": 3093,
+          "molecule": {
+            "id": 750,
+            "latName": "nitrofural",
+            "originalLatName": "nitrofuralum",
+            "rusName": "нитрофурал",
+            "GNParent": {
+              "GNParent": "Rec.INN",
+              "description": "зарегистрированное ВОЗ"
+            },
+            "documents": [
+              {
+                "documentId": 1986,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 28710,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 46194,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 46216,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 48686,
+                "moleculeId": 750
+              },
+              {
+                "documentId": 51547,
+                "moleculeId": 750
+              }
+            ],
+            "moleculeNames": []
+          },
+          "rusName": "нитрофурал",
+          "engName": "nitrofural"
+        }
+      ],
+      "id": 10624,
+      "rusName": "Фурацилин",
+      "engName": "Furacilin",
+      "nonPrescriptionDrug": true,
+      "registrationDate": "17.08.11",
+      "dateOfCloseRegistration": null,
+      "registrationNumber": "ЛС-001911",
+      "zipInfo": " таб. д/пригот. р-ра д/местн. прим. 20 мг: 10, 20, 2000 или 4000 шт.",
+      "composition": "<TABLE width=\"100%\" border=\"1\">\n<TR>\n<TD> <I><B>Таблетки</B></I></TD>\n<TD><B>1 таб.</B></TD></TR>\n<TR>\n<TD>нитрофурал</TD>\n<TD>20 мг</TD></TR></TABLE>\n<P>10 шт. - упаковки безъячейковые контурные (1) - пачки картонные.<BR />10 шт. - упаковки безъячейковые контурные (2) - пачки картонные.<BR />10 шт. - упаковки безъячейковые контурные (200) - пачки картонные.<BR />10 шт. - упаковки безъячейковые контурные (400) - пачки картонные.<BR />10 шт. - упаковки ячейковые контурные (1) - пачки картонные.<BR />10 шт. - упаковки ячейковые контурные (2) - пачки картонные.<BR />10 шт. - упаковки ячейковые контурные (200) - пачки картонные.<BR />10 шт. - упаковки ячейковые контурные (400) - пачки картонные.</P>",
+      "productTypeCode": "DRUG",
+      "marketStatus": {
+        "id": 2,
+        "rusName": "Бессрочно"
+      },
+      "dateOfReRegistration": null,
+      "gnvls": false,
+      "listPkkn": null,
+      "strongMeans": false,
+      "poison": false,
+      "companies": [
+        {
+          "isRegistrationCertificate": true,
+          "isManufacturer": false,
+          "company": {
+            "name": "ТАТХИМФАРМПРЕПАРАТЫ",
+            "GDDBName": "TATCHIMPHARMPREPARATY AO",
+            "country": {
+              "code": "RUS",
+              "rusName": "Россия"
+            }
+          },
+          "companyRusNote": null
+        }
+      ],
+      "document": {
+        "storageCondition": null,
+        "storageTime": "",
+        "updatedAt": "2020-10-19T12:07:30+03:00",
+        "nozologies": [
+          {
+            "code": "H01.0",
+            "name": "Блефарит"
+          },
+          {
+            "code": "H10..",
+            "name": "Конъюнктивит"
+          },
+          {
+            "code": "J01..",
+            "name": "Острый синусит"
+          },
+          {
+            "code": "J03..",
+            "name": "Острый тонзиллит"
+          },
+          {
+            "code": "J86..",
+            "name": "Пиоторакс (эмпиема плевры)"
+          },
+          {
+            "code": "K05..",
+            "name": "Гингивит и болезни пародонта"
+          },
+          {
+            "code": "K12..",
+            "name": "Стоматит и родственные поражения"
+          },
+          {
+            "code": "L89..",
+            "name": "Декубитальная язва и область давления"
+          },
+          {
+            "code": "L98.4",
+            "name": "Хроническая язва кожи, не классифицированная в других рубриках"
+          },
+          {
+            "code": "M86..",
+            "name": "Остеомиелит"
+          },
+          {
+            "code": "N30..",
+            "name": "Цистит"
+          },
+          {
+            "code": "N34..",
+            "name": "Уретрит и уретральный синдром"
+          },
+          {
+            "code": "T14.0",
+            "name": "Поверхностная травма неуточненной области тела (в т.ч. ссадина, кровоподтек, ушиб, гематома, укус неядовитого насекомого)"
+          },
+          {
+            "code": "T30..",
+            "name": "Термические и химические ожоги неуточненной локализации"
+          },
+          {
+            "code": "T79.3",
+            "name": "Посттравматическая раневая инфекция, не классифицированная в других рубриках"
+          }
+        ],
+        "clphPointers": [
+          {
+            "id": 16919,
+            "code": "06.20.03",
+            "name": "Производные нитрофурана для наружного применения"
+          },
+          {
+            "id": 17881,
+            "code": "29.01.04",
+            "name": "Производные нитрофурана"
+          }
+        ],
+        "documentId": 1986,
+        "articleId": 1,
+        "yearEdition": "0",
+        "phInfluence": "Противомикробное средство, производное нитрофурана. Активен в отношении грамположительных бактерий: Staphylococcus spp., Streptococcus spp., Bacillus anthracis; грамотрицательных бактерий: Escherichia coli, Shigella spp., Salmonella spp. (в т.ч. Salmonella paratyphi).",
+        "phKinetics": "При местном и наружном применении всасывание незначительное. Проникает через гистогематические барьеры и равномерно распределяется в жидкостях и тканях. Основной путь метаболизма - восстановление нитрогруппы. Выводится с мочой и частично с калом.",
+        "dosage": "<P>Применяют наружно и местно. Дозу, способ и схему применения, длительность терапии определяют индивидуально, в зависимости от показаний, клинической ситуации и применяемой лекарственной формы.</P>",
+        "overDosage": null,
+        "interaction": null,
+        "lactation": "<P>При беременности и в период грудного вскармливания возможно применение по показаниям в тех случаях, когда предполагаемая польза для матери превышает потенциальный риск для плода или младенца.</P>",
+        "sideEffects": "<I>Возможно:</I> местные аллергические реакции, дерматиты.",
+        "indication": "<P>Для наружного применения: гнойные раны, пролежни, ожоги II-III степени, мелкие повреждения кожи (в т.ч. ссадины, царапины, трещины, порезы). </P><P>Для местного применения: острый наружный и средний отит, тонзиллит, стоматит, гингивит; остеомиелит, эмпиема придаточных пазух носа и плевры, инфекции мочевыводящих путей.</P>",
+        "contraIndication": "Повышенная чувствительность к нитрофуралу и другим производным нитрофурана; кровотечение, аллергодерматозы, выраженные нарушения функции почек.",
+        "specialInstruction": "<P>Если после лечения улучшение не наступает или симптомы усугубляются, или появляются новые симптомы, необходимо проконсультироваться с врачом. </P><P>Применять средство следует строго согласно тем показаниям, тому способу применения, которые указаны в инструкции по применению конкретной лекарственной формы.</P>",
+        "pregnancyUsing": "Care",
+        "nursingUsing": "Care",
+        "renalInsuf": "Противопоказан к применению при выраженных нарушениях функции почек.",
+        "renalInsufUsing": "Care",
+        "hepatoInsuf": null,
+        "hepatoInsufUsing": "Qwes",
+        "pharmDelivery": null,
+        "elderlyInsuf": null,
+        "elderlyInsufUsing": null,
+        "childInsuf": null,
+        "childInsufUsing": null
+      },
+      "forms": null,
+      "productPackages": [],
+      "regPreviousNumber": null
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "limit": 5,
+    "pageCount": 8,
+    "itemsCount": 5,
+    "totalItemsCount": 38
+  }
+}

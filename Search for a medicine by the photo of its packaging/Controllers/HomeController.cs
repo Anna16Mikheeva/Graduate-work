@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using Search_for_a_medicine_by_the_photo_of_its_packaging.Models;
 using System.Diagnostics;
@@ -10,27 +8,87 @@ using Newtonsoft.Json;
 using System.Web;
 using System.IO;
 using Tesseract;
-using System;
 using System.Collections.Generic;
+using ZXing;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
+using ZXing.QrCode;
+using System.Drawing;
+//using System.DrawingCore;
 
 namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ILogger<HomeController> _logger;
+
         /// <summary>
         /// Экземпляр класса PhotoProcessing
         /// </summary>
-        private PhotoProcessing image = new PhotoProcessing();
+        private readonly PhotoProcessing _image = new PhotoProcessing();
 
         /// <summary>
         /// Экземпляр класса ViewModel
         /// </summary>
-        private ViewModel viewModel = new ViewModel();
+        private readonly ViewModel _viewModel = new ViewModel();
 
         /// <summary>
         /// Экземпляр класса DataNames
         /// </summary>
-        private DataNames dataNames = new DataNames();
+        private readonly DataNames _dataNames = new DataNames();
+
+        //-------------------
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment webHostEnvironment)
+        {
+            _logger = logger;
+            _webHostEnvironment = webHostEnvironment;
+        }
+
+        [HttpPost]
+        public ActionResult ReadBarCode(IFormCollection formCollection)
+        {
+            var writer = new QRCodeWriter();
+            var resultBit = writer.encode(formCollection["QRCodeString"], BarcodeFormat.QR_CODE, 200, 200);
+            var matrix = resultBit;
+            var scale = 2;
+            Bitmap result = new Bitmap(matrix.Width*scale, matrix.Height*scale);
+            for(int i = 0; i < matrix.Height; i++)
+            {
+                for(int j = 0; j < matrix.Width; j++)
+                {
+                    Color pixel = matrix[i, j] ? Color.Black : Color.White;
+                    for(int x = 0; x < scale; x++)
+                    {
+                        for (int y = 0; y < scale; y++)
+                        {
+                            result.SetPixel(i * scale + x, j * scale + y, pixel);
+                        }
+                    }
+                }
+            }
+            string webRoothPath = _webHostEnvironment.WebRootPath;
+            result.Save(webRoothPath + "\\img\\QR.png");
+            ViewBag.URL = "\\img\\QR.png";
+            return View("BarCode");
+        }
+
+        public ActionResult ReadQRCode()
+        {
+            string webRoothPath = _webHostEnvironment.WebRootPath;
+            var path = webRoothPath + "\\img\\Cream qr.jpeg";
+            var reader = new BarcodeReaderGeneric();
+            Bitmap image = (Bitmap)Image.FromFile(path);
+            using(image)
+            {
+                LuminanceSource source;
+                source = new ZXing.Windows.Compatibility.BitmapLuminanceSource(image);
+                Result result = reader.Decode(source);
+                ViewBag.Text = result.Text;
+            }
+            return View("BarCode");
+        }
 
         /// <summary>
         /// Возвращает главную страницу Index
@@ -176,7 +234,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                 writer.WriteLine(json);
                 writer.Close();
                 var jsonString = System.IO.File.ReadAllText("Product.json");
-                viewModel.DataNamesView = DescriptionOfTheDrug(jsonString, dataNames);
+                viewModel.DataNamesView = DescriptionOfTheDrug(jsonString, _dataNames);
 
                 return View("Privacy", viewModel);
             }

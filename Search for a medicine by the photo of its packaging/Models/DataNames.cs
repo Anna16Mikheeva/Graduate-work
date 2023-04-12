@@ -71,6 +71,11 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Models
         public string DosingRegimen { get; set; }
 
         /// <summary>
+        /// Передозировка
+        /// </summary>
+        public string OverDosage { get; set; }
+
+        /// <summary>
         /// Побочное действие
         /// </summary>
         public string SideEffect { get; set; }
