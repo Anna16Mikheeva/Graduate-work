@@ -1,77 +1,108 @@
 ﻿@model Search_for_a_medicine_by_the_photo_of_its_packaging.Models.ViewModel
+@using Microsoft.AspNetCore.Html;
+@{
+    HtmlString nameDrugsRus = new HtmlString(Model.DataNamesView.NameDrugsRus);
+    HtmlString nameDNameDrugsEng = new HtmlString(Model.DataNamesView.NameDrugsEng);
+    HtmlString atcCode = new HtmlString(Model.DataNamesView.AtcCode);
+
+    string[] nameOfActiveSubstancesRus = Model.DataNamesView.NameOfActiveSubstancesRus;
+    string[] nameOfActiveSubstancesEng = Model.DataNamesView.NameOfActiveSubstancesEng;
+    string[] nameCompanyEng = Model.DataNamesView.NameCompanyEng;
+    string[] nameCompanyRus = Model.DataNamesView.NameCompanyRus;
+    @for (int i = 0; i < Model.DataNamesView.NameOfActiveSubstancesRus.Length; i++)
+    {
+        nameOfActiveSubstancesRus[i] = new HtmlString(nameOfActiveSubstancesRus[i]).ToString();
+        nameOfActiveSubstancesEng[i] = new HtmlString(nameOfActiveSubstancesEng[i]).ToString();
+        nameCompanyEng[i] = new HtmlString(nameCompanyEng[i]).ToString();
+        nameCompanyRus[i] = new HtmlString(nameCompanyRus[i]).ToString();
+    }
+
+    HtmlString pharmachologicEffect = new HtmlString(Model.DataNamesView.PharmachologicEffect);
+    HtmlString indicationsOfTheActiveSubstancesOfTheDrug = new HtmlString(Model.DataNamesView.IndicationsOfTheActiveSubstancesOfTheDrug);
+    HtmlString dosingRegimen = new HtmlString(Model.DataNamesView.DosingRegimen);
+    HtmlString overDosage = new HtmlString(Model.DataNamesView.OverDosage);
+    HtmlString sideEffect = new HtmlString(Model.DataNamesView.SideEffect);
+    HtmlString contraindicationsForUse = new HtmlString(Model.DataNamesView.ContraindicationsForUse);
+    HtmlString useDuringPregnancyAndLactation = new HtmlString(Model.DataNamesView.UseDuringPregnancyAndLactation);
+    HtmlString applicationForViolationsOfLiverFunction = new HtmlString(Model.DataNamesView.ApplicationForViolationsOfLiverFunction);
+    HtmlString applicationForViolationsOfKidneyFunction = new HtmlString(Model.DataNamesView.ApplicationForViolationsOfKidneyFunction);
+    HtmlString useInChildren = new HtmlString(Model.DataNamesView.UseInChildren);
+    HtmlString specialInstructions = new HtmlString(Model.DataNamesView.SpecialInstructions);
+    HtmlString drugInteraction = new HtmlString(Model.DataNamesView.DrugInteraction);
+}
 
 <div align="justify">
     <font size="4">
         @if (Model.PhotoProcessingView != null)
         {
-            <font color=#8B0000><h2>@Html.DisplayFor(modelItem => Model.DataNamesView.NameDrugsRus) (@Html.DisplayFor(modelItem => Model.DataNamesView.NameDrugsEng))</h2></font>
-            <h3>Код АТХ:</h3>@Html.DisplayFor(modelItem => Model.DataNamesView.AtcCode)
+            <font color=#8B0000><h2>@nameDrugsRus (@nameDNameDrugsEng)</h2></font>
+            <h3>Код АТХ:</h3>@atcCode
             <p /><h3>Активные вещества и состав</h3>
             @for (int i = 0; i < Model.DataNamesView.NameOfActiveSubstancesRus.Length; i++)
             {
-                @Html.DisplayFor(item => item.DataNamesView.NameOfActiveSubstancesRus[i]) <font size="3" color="gray">@Html.DisplayFor(item => item.DataNamesView.NameOfActiveSubstancesEng[i])</font>
-                <font size="4" color=#566aa3>@Html.DisplayFor(item => item.DataNamesView.NameCompanyEng[i]) </font><font size="3" color="gray">@Html.DisplayFor(item => item.DataNamesView.NameCompanyRus[i])</font><br />
+                @nameOfActiveSubstancesRus[i] <font size="3" color="gray">@nameOfActiveSubstancesEng[i]</font>
+                <font size="4" color=#566aa3>@nameCompanyEng[i] </font><font size="3" color="gray">@nameCompanyRus[i]</font><br />
             }
-            @if (Model.DataNamesView.pPharmachologicEffect != null)
+            @if (Model.DataNamesView.PharmachologicEffect != null)
             {
                 <p /><h3>Фармакологическое действие</h3>
-                @Html.DisplayFor(item => item.DataNamesView.pPharmachologicEffect)
+                @pharmachologicEffect
             }
             @if (Model.DataNamesView.IndicationsOfTheActiveSubstancesOfTheDrug != null)
             {
-                <p /><h3>Показания активных веществ препарата @Html.DisplayFor(modelItem => Model.DataNamesView.NameDrugsRus)</h3>
-                @Html.DisplayFor(item => item.DataNamesView.IndicationsOfTheActiveSubstancesOfTheDrug)
+                <p /><h3>Показания активных веществ препарата @nameDrugsRus</h3>
+                @indicationsOfTheActiveSubstancesOfTheDrug
             }
             @if (Model.DataNamesView.DosingRegimen != null)
             {
                 <p /><h3>Режим дозирования</h3>
-                @Html.DisplayFor(item => item.DataNamesView.DosingRegimen)
+                @dosingRegimen
             }
             @if (Model.DataNamesView.OverDosage != null)
             {
                 <p /><h3>Передозировка</h3>
-                @Html.DisplayFor(item => item.DataNamesView.OverDosage)
+                @overDosage
             }
             @if (Model.DataNamesView.SideEffect != null)
             {
                 <p /><h3>Побочное действие</h3>
-                @Html.DisplayFor(item => item.DataNamesView.SideEffect)
+                @sideEffect
             }
             @if (Model.DataNamesView.ContraindicationsForUse != null)
             {
                 <p /><h3>Противопоказания к применению</h3>
-                @Html.DisplayFor(item => item.DataNamesView.ContraindicationsForUse)
+                @contraindicationsForUse
             }
             @if (Model.DataNamesView.UseDuringPregnancyAndLactation != null)
             {
                 <p /><h3>Применение при беременности и кормлении грудью</h3>
-                @Html.DisplayFor(item => item.DataNamesView.UseDuringPregnancyAndLactation)
+                @useDuringPregnancyAndLactation
             }
             @if (Model.DataNamesView.ApplicationForViolationsOfLiverFunction != null)
             {
                 <p /><h3>Применение при нарушениях функции печени</h3>
-                @Html.DisplayFor(item => item.DataNamesView.ApplicationForViolationsOfLiverFunction)
+                @applicationForViolationsOfLiverFunction
             }
             @if (Model.DataNamesView.ApplicationForViolationsOfKidneyFunction != null)
             {
                 <p /><h3>Применение при нарушениях функции почек</h3>
-                @Html.DisplayFor(item => item.DataNamesView.ApplicationForViolationsOfKidneyFunction)
+                @applicationForViolationsOfKidneyFunction
             }
             @if (Model.DataNamesView.UseInChildren != null)
             {
                 <p /><h3>Применение у детей</h3>
-                @Html.DisplayFor(item => item.DataNamesView.UseInChildren)
+                @useInChildren
             }
             @if (Model.DataNamesView.SpecialInstructions != null)
             {
                 <p /><h3>Особые указания</h3>
-                @Html.DisplayFor(item => item.DataNamesView.SpecialInstructions)
+                @specialInstructions
             }
             @if (Model.DataNamesView.DrugInteraction != null)
             {
                 <p /><h3>Лекарственное взаимодействие</h3>
-                @Html.DisplayFor(item => item.DataNamesView.DrugInteraction)
-                }
+                @drugInteraction
             }
-        </font>
+        }
+    </font>
 </div>

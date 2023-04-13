@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using ZXing.QrCode;
 using System.Drawing;
-//using System.DrawingCore;
+using ZXing.Windows.Compatibility;
 
 namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
 {
@@ -49,28 +49,38 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
         [HttpPost]
         public ActionResult ReadBarCode(IFormCollection formCollection)
         {
-            var writer = new QRCodeWriter();
-            var resultBit = writer.encode(formCollection["QRCodeString"], BarcodeFormat.QR_CODE, 200, 200);
-            var matrix = resultBit;
-            var scale = 2;
-            Bitmap result = new Bitmap(matrix.Width*scale, matrix.Height*scale);
-            for(int i = 0; i < matrix.Height; i++)
-            {
-                for(int j = 0; j < matrix.Width; j++)
-                {
-                    Color pixel = matrix[i, j] ? Color.Black : Color.White;
-                    for(int x = 0; x < scale; x++)
-                    {
-                        for (int y = 0; y < scale; y++)
-                        {
-                            result.SetPixel(i * scale + x, j * scale + y, pixel);
-                        }
-                    }
-                }
-            }
+            //var writer = new QRCodeWriter();
+            //var resultBit = writer.encode(formCollection["QRCodeString"], BarcodeFormat.QR_CODE, 200, 200);
+            //var matrix = resultBit;
+            //var scale = 2;
+            //Bitmap result = new Bitmap(matrix.Width*scale, matrix.Height*scale);
+            //for(int i = 0; i < matrix.Height; i++)
+            //{
+            //    for(int j = 0; j < matrix.Width; j++)
+            //    {
+            //        Color pixel = matrix[i, j] ? Color.Black : Color.White;
+            //        for(int x = 0; x < scale; x++)
+            //        {
+            //            for (int y = 0; y < scale; y++)
+            //            {
+            //                result.SetPixel(i * scale + x, j * scale + y, pixel);
+            //            }
+            //        }
+            //    }
+            //}
+            //string webRoothPath = _webHostEnvironment.WebRootPath;
+            //result.Save(webRoothPath + "\\img\\QR.png");
+            //ViewBag.URL = "\\img\\QR.png";
+
             string webRoothPath = _webHostEnvironment.WebRootPath;
-            result.Save(webRoothPath + "\\img\\QR.png");
-            ViewBag.URL = "\\img\\QR.png";
+            var path = webRoothPath + "\\img\\BarCode.jpeg";
+            Bitmap image = (Bitmap)Image.FromFile(path);
+            BarcodeReader reader = new BarcodeReader();
+            var result = reader.Decode(image);
+            if (result != null)
+            {
+                ViewBag.Text = result.Text;
+            }
             return View("BarCode");
         }
 
@@ -283,7 +293,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             }
 
             //Фармакологическое действие
-            dataNames.pPharmachologicEffect = HttpUtility.HtmlEncode(rootobject.products[0].document.phInfluence);
+            dataNames.PharmachologicEffect = rootobject.products[0].document.phInfluence;
             //Показания активных веществ препарата 
             dataNames.IndicationsOfTheActiveSubstancesOfTheDrug = rootobject.products[0].document.indication;
             //Режим дозирования
