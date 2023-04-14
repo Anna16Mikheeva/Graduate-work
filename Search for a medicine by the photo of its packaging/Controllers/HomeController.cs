@@ -49,29 +49,6 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
         [HttpPost]
         public ActionResult ReadBarCode(IFormCollection formCollection)
         {
-            //var writer = new QRCodeWriter();
-            //var resultBit = writer.encode(formCollection["QRCodeString"], BarcodeFormat.QR_CODE, 200, 200);
-            //var matrix = resultBit;
-            //var scale = 2;
-            //Bitmap result = new Bitmap(matrix.Width*scale, matrix.Height*scale);
-            //for(int i = 0; i < matrix.Height; i++)
-            //{
-            //    for(int j = 0; j < matrix.Width; j++)
-            //    {
-            //        Color pixel = matrix[i, j] ? Color.Black : Color.White;
-            //        for(int x = 0; x < scale; x++)
-            //        {
-            //            for (int y = 0; y < scale; y++)
-            //            {
-            //                result.SetPixel(i * scale + x, j * scale + y, pixel);
-            //            }
-            //        }
-            //    }
-            //}
-            //string webRoothPath = _webHostEnvironment.WebRootPath;
-            //result.Save(webRoothPath + "\\img\\QR.png");
-            //ViewBag.URL = "\\img\\QR.png";
-
             string webRoothPath = _webHostEnvironment.WebRootPath;
             var path = webRoothPath + "\\img\\BarCode.jpeg";
             Bitmap image = (Bitmap)Image.FromFile(path);
