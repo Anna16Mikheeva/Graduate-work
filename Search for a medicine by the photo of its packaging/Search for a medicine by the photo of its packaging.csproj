@@ -7,7 +7,16 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
     <PackageReference Include="Tesseract" Version="4.1.1" />
+    <PackageReference Include="ZXing.Net" Version="0.16.9" />
+    <PackageReference Include="ZXing.Net.Bindings.Windows.Compatibility" Version="0.16.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\img\BarCode.jpeg" />
+    <None Include="wwwroot\img\Cream qr.jpeg" />
+    <None Include="wwwroot\img\Otc.jpeg" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
