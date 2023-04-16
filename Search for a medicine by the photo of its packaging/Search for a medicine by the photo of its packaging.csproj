@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\CameraPhotos\photo.jpeg" />
     <None Include="wwwroot\img\BarCode.jpeg" />
     <None Include="wwwroot\img\Cream qr.jpeg" />
     <None Include="wwwroot\img\Otc.jpeg" />

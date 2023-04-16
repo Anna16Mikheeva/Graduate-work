@@ -1,6 +1,8 @@
-﻿@{ 
+﻿@model Search_for_a_medicine_by_the_photo_of_its_packaging.Models.ViewModel
+
+@*@{
     Layout = null;
-}
+}*@
 
 <!DOCTYPE html>
 
@@ -14,13 +16,15 @@
         body {
             font-family: Arial, Helvetica, sans-serif;
         }
-        h2, h3
-        {
+
+        h2, h3 {
             margin-top: 0;
         }
+
         form {
             margin-top: 15px;
         }
+
             form > input {
                 margin-right: 15px;
             }
@@ -43,35 +47,35 @@
             <div class="panel-body">
                 <div id="my_camera"></div>
                 <form>
-                    <input type="button" class="btn btn-success" value="Take Snapshot"
-                           onclick="take_snapshot()" />
+                    <input type="button" class="btn btn-success" value="Take Snapshot" 
+                           onclick="take_snapshot()"  />
                 </form>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Captured Photo
-            </div>
-            <div class="panel-body">
-                <div id="results">Your captured image will appear here...</div>
-            </div>
-            <br />
-            <br />
+<div class="col-md-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Captured Photo
         </div>
+        <div class="panel-body">
+            <div id="results">Your captured image will appear here...</div>
+        </div>
+        <br />
+        <br />
     </div>
+</div>
     <div class="col-md-2"></div>
-<script src="/webcamjs/webcam.js"></script>
-<script language="javascript">
-    Webcam.set({
-        width: 320,
-        height: 240,
-        image_format: 'jpeg',
-        jpeg_quality: 90
-    });
-    Webcam.attach('#my_camera');
-</script>
+    <script src="/webcamjs/webcam.js"></script>
+    <script language="javascript">
+        Webcam.set({
+            width: 320,
+            height: 240,
+            image_format: 'jpeg',
+            jpeg_quality: 90
+        });
+        Webcam.attach('#my_camera');
+    </script>
 <script language="JavaScript">
         function take_snapshot() {
             Webcam.snap(function (data_uri) {
@@ -80,12 +84,11 @@
                 data_uri +
                     '"/>';
                 Webcam.upload(data_uri,
-                            'Camera/Capture',
-                            function (code, text) {
-                                alert('Photo Captured')
-        });
+                    'Capture');
             });
-            }
+        }
     </script>
+
+
 </body>
 </html>
