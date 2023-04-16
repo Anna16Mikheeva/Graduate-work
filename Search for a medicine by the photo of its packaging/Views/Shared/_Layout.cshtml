@@ -135,15 +135,15 @@
         }
     </style>
 
-    <script>
-        /*Поиск при нажатии на кнопку "Enter"*/
-        $("#id_of_textbox").keyup(function (event) {
-            if (event.keyCode == 13) {
-                $("#id_of_button").click();
-                $(this).val('');
-            }
-        });
-    </script>
+<script>
+    /*Поиск при нажатии на кнопку "Enter"*/
+    $("#id_of_textbox").keyup(function (event) {
+        if (event.keyCode == 13) {
+            $("#id_of_button").click();
+            $(this).val('');
+        }
+    });
+</script>*@
 
 <body>
     <style>
@@ -164,26 +164,21 @@
                 </div>
             </div>
         </nav>
-        <div class="text-center">
-                <form asp-controller="Home" class="form_line_search" enctype="multipart/form-data">
-                    <input asp-for="PhotoProcessingView.SearchLine" name="PhotoProcessingView.SearchLine" id="id_of_textbox" class="input_line_search" type="text" placeholder="Искать здесь...">
-                    <button id="id_of_button" class="button_line_search" type="submit" asp-controller="Home" asp-action="ApiVidal"></button>
-                    <div class="input__wrapper">
-                        <input asp-for="PhotoProcessingView.PackingImage" name="PhotoProcessingView.PackingImage" type="file" id="input__file" accept="image/jpeg,image/png" class="input input__file" multiple>
-                        <label asp-for="PhotoProcessingView.PackingImage" for="input__file" class="input__file-button">
-                            <span class="input__file-icon-wrapper"><img class="input__file-icon" src="https://smartlanding.biz/demo/fileinput/img/add.svg" width="25"></span>
-                            <span class="input__file-button-text">Выберите файл</span>
-                        </label>
-                    </div>
-                    <button asp-action="ReadBarCode"></button>
-                </form>
-            </div>
-        <div class="text-center errortext">
-            @if (Model != null)
-            {
-                @Html.DisplayFor(Model => Model.PhotoProcessingView.Error)
-            }
-        </div>
+        @*<div class="text-center">
+            <form asp-controller="Home" class="form_line_search">
+                <input id="id_of_textbox" class="input_line_search" type="text" placeholder="Искать здесь...">
+                <button id="id_of_button" class="button_line_search" type="submit" asp-controller="Home" asp-action="TextRecognising"></button>
+
+                <div class="input__wrapper">
+                    <input asp-for="PackingImage" name="PackingImage" type="file" id="input__file" accept="image/jpeg,image/png" class="input input__file" multiple>
+                    <label asp-for="PackingImage" for="input__file" class="input__file-button">
+                        <span class="input__file-icon-wrapper"><img class="input__file-icon" src="https://smartlanding.biz/demo/fileinput/img/add.svg" width="25"></span>
+                        <span class="input__file-button-text">Выберите файл</span>
+                    </label>
+                    <button id="id_of_button" class="button_line_search" type="submit" asp-controller="Home" asp-action="TextRecognising"></button>
+                </div>
+            </form>
+        </div>*@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
