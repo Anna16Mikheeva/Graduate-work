@@ -12,8 +12,10 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Tesseract;
-using ZXing;
 using ZXing.Windows.Compatibility;
+using AForge;
+using AForge.Imaging;
+using AForge.Imaging.Filters;
 
 namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
 {
@@ -39,7 +41,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
         //-------------------
         private readonly IWebHostEnvironment _environment;
 
-        static IFormFile t = null;
+        private static IFormFile _camera = null;
 
         public HomeController(ILogger<HomeController> logger, IWebHostEnvironment environment)
         {
@@ -52,12 +54,27 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             return View();
         }
 
+        public void SharpenPhoto(string fileName)
+        {
+            IFilter filter = new Sharpen();
+            var path = "D://Аня//Диплом//Graduate work//" +
+                       "Search for a medicine by the photo of its packaging" +
+                       "//wwwroot//CameraPhotos//webcam.jpg";
+            Bitmap image = (Bitmap)System.Drawing.Image.FromFile(path);
+            Bitmap newImage = filter.Apply(image);
+            image.Dispose();
+            System.IO.File.Delete(path);
+            newImage.Save("D://Аня//Диплом//Graduate work//" +
+                          "Search for a medicine by the photo of its packaging" +
+                          "//wwwroot//CameraPhotos//webcam.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+        }
+
         [HttpPost]
         public IActionResult Capture(string name)
         {
             
-            try
-            {
+            //try
+            //{
                 var files = HttpContext.Request.Form.Files;
                 if (files != null)
                 {
@@ -66,42 +83,55 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                         if (file.Length > 0)
                         {
                             var fileName = file.FileName;
-                            var myUniqueFileName = "photo";
+                            var myUniqueFileName = "webcam";
                             var fileExtension = Path.GetExtension(fileName);
                             var newFileName = string.Concat(myUniqueFileName, fileExtension);
                             var filePath = Path.Combine(_environment.WebRootPath, "CameraPhotos") + $@"\{newFileName}";
-                            //viewModel.PhotoProcessingView.PackingImage = file;
+                            //SharpenPhoto(filePath);
                             if (!string.IsNullOrEmpty(filePath))
                             {
                                 StoreInFolder(file, filePath);
                             }
 
                             var imageBytes = System.IO.File.ReadAllBytes(filePath);
+                                //SharpenPhoto(filePath);
                         }
 
-                        t = file;
+                        _camera = file;
+                        
                     }
 
                      /*Json(true)*/;
                 }
-                else
-                {
+            //    else
+            //    {
                     
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //    throw;
+            //}
             return View("Index"); 
         }
 
         private void StoreInFolder(IFormFile file, string fileName)
         {
-            using (FileStream fs = System.IO.File.Create(fileName))
+            FileStream fs;
+            if (System.IO.File.Exists(fileName) == false)
             {
+                fs = System.IO.File.Create(fileName);
                 file.CopyTo(fs);
                 fs.Flush();
+                fs.Close();
+            }
+            else
+            {
+                System.IO.File.Delete(fileName);
+                fs = System.IO.File.Create(fileName);
+                file.CopyTo(fs);
+                fs.Flush();
+                fs.Close();
             }
         }
 
@@ -115,7 +145,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
         {
             string webRoothPath = _environment.WebRootPath;
             var path = webRoothPath + "\\CameraPhotos\\" + photo.PackingImage.FileName;
-            Bitmap image = (Bitmap)Image.FromFile(path);
+            Bitmap image = (Bitmap)System.Drawing.Image.FromFile(path);
             BarcodeReader reader = new BarcodeReader();
             var result = reader.Decode(image);
             if (result == null)
@@ -204,9 +234,9 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             var path = "Product.json";
             string search = null;
             httpClient.DefaultRequestHeaders.Add("X-Token", token);
-            if (t != null)
+            if (_camera != null)
             {
-                viewModel.PhotoProcessingView.PackingImage = t;
+                viewModel.PhotoProcessingView.PackingImage = _camera;
             }
 
             if (!string.IsNullOrEmpty(viewModel.PhotoProcessingView.SearchLine) &&

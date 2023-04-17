@@ -56,14 +56,17 @@
     Webcam.attach('#my_camera');
 </script>
 <script language="JavaScript">
-        function take_snapshot() {
-            Webcam.snap(function (data_uri) {
-                document.getElementById('results').innerHTML =
-                    '<img src="' +
+    function take_snapshot() {
+        Webcam.snap(function (data_uri) {
+            document.getElementById('results').innerHTML =
+                '<img src="' +
                 data_uri +
-                    '"/>';
-                Webcam.upload(data_uri,
-                            'Capture');
-            });
-            }
-    </script>
+                '"/>';
+            Webcam.upload(data_uri,
+                'Home/Capture',
+                function (code, text) {
+                    alert('Photo Captured')
+                });
+        });
+    }
+</script>

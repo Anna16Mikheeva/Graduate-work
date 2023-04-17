@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AForge" Version="2.2.3" />
+    <PackageReference Include="AForge.Imaging" Version="2.2.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
     <PackageReference Include="Tesseract" Version="4.1.1" />
@@ -14,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\CameraPhotos\photo.jpeg" />
     <None Include="wwwroot\img\BarCode.jpeg" />
     <None Include="wwwroot\img\Cream qr.jpeg" />
     <None Include="wwwroot\img\Otc.jpeg" />
