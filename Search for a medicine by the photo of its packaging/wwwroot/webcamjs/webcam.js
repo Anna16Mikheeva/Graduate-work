@@ -276,6 +276,8 @@ var Webcam = {
 			video.setAttribute('autoplay', 'autoplay');
 			video.style.width = '' + this.params.dest_width + 'px';
 			video.style.height = '' + this.params.dest_height + 'px';
+			video.style.textAlign = 'center';
+			video.style.ali
 			
 			if ((scaleX != 1.0) || (scaleY != 1.0)) {
 				elem.style.overflow = 'hidden';

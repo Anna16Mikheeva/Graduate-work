@@ -1,94 +1,69 @@
 ﻿@model Search_for_a_medicine_by_the_photo_of_its_packaging.Models.ViewModel
 
-@*@{
-    Layout = null;
-}*@
+<style>
+    .div-center {
+        text-align: center;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
 
-<!DOCTYPE html>
+    .form {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
 
-<html lang="en">
+    .input {
+        height: 35px;
+        width: 35px;
+        background-color: #1bbc9b;
+        border-radius: 20px;
+    }
 
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>WebCams Test Page</title>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <style type="text/css">
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
+    #buttonhiden {
+        background: transparent;
+        border: none !important;
+        font-size: 0;
+    }
+</style>
 
-        h2, h3 {
-            margin-top: 0;
-        }
-
-        form {
-            margin-top: 15px;
-        }
-
-            form > input {
-                margin-right: 15px;
-            }
-
-        #buttonhiden {
-            background: transparent;
-            border: none !important;
-            font-size: 0;
-        }
-    </style>
-</head>
-<body class="container">
-    <br />
-    <div class="col-md-2"></div>
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Camera
-            </div>
-            <div class="panel-body">
-                <div id="my_camera"></div>
-                <form>
-                    <input type="button" class="btn btn-success" value="Take Snapshot" 
-                           onclick="take_snapshot()"  />
-                </form>
-            </div>
+<br />
+            <div id="my_camera" class="div-center"></div>
+            <form class="div-center form">
+                <input type="button" class="btn btn-success input"
+                       onclick="take_snapshot()" />
+            </form>
+<div>
+    <div>
+        <div>
         </div>
-    </div>
-<div class="col-md-4">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            Captured Photo
-        </div>
-        <div class="panel-body">
-            <div id="results">Your captured image will appear here...</div>
+        <div class="div-center">
+            <div id="results"></div>
         </div>
         <br />
         <br />
     </div>
 </div>
-    <div class="col-md-2"></div>
-    <script src="/webcamjs/webcam.js"></script>
-    <script language="javascript">
-        Webcam.set({
-            width: 320,
-            height: 240,
-            image_format: 'jpeg',
-            jpeg_quality: 90
-        });
-        Webcam.attach('#my_camera');
-    </script>
+<div></div>
+<script src="/webcamjs/webcam.js"></script>
+<script language="javascript">
+    Webcam.set({
+        width: 320,
+        height: 240,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+    });
+    Webcam.attach('#my_camera');
+</script>
 <script language="JavaScript">
         function take_snapshot() {
             Webcam.snap(function (data_uri) {
                 document.getElementById('results').innerHTML =
-                    '<img src="'
+                    '<img src="' +
                 data_uri +
                     '"/>';
                 Webcam.upload(data_uri,
-                    'Capture');
+                            'Capture');
             });
-        }
+            }
     </script>
-
-
-</body>
-</html>
