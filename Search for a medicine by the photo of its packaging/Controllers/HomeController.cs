@@ -72,9 +72,9 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
         [HttpPost]
         public IActionResult Capture(string name)
         {
-            
-            //try
-            //{
+
+            try
+            {
                 var files = HttpContext.Request.Form.Files;
                 if (files != null)
                 {
@@ -87,14 +87,14 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                             var fileExtension = Path.GetExtension(fileName);
                             var newFileName = string.Concat(myUniqueFileName, fileExtension);
                             var filePath = Path.Combine(_environment.WebRootPath, "CameraPhotos") + $@"\{newFileName}";
-                            //SharpenPhoto(filePath);
+                            SharpenPhoto(filePath);
                             if (!string.IsNullOrEmpty(filePath))
                             {
                                 StoreInFolder(file, filePath);
                             }
 
                             var imageBytes = System.IO.File.ReadAllBytes(filePath);
-                                //SharpenPhoto(filePath);
+                            SharpenPhoto(filePath);
                         }
 
                         _camera = file;
@@ -103,15 +103,15 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
 
                      /*Json(true)*/;
                 }
-            //    else
-            //    {
-                    
-            //    }
-            //}
-            //catch (Exception)
-            //{
-            //    throw;
-            //}
+                //    else
+                //    {
+
+                //    }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
             return View("Index"); 
         }
 
@@ -206,6 +206,8 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                 Pix.LoadFromFile(_environment.WebRootPath + "\\CameraPhotos\\" + image.PackingImage.FileName);
             var process = ocrengine.Process(loadFromFile);
             var textGhoto = process.GetText();
+            loadFromFile.Dispose();
+            loadFromFile = null;
             textGhoto = textGhoto.Replace("\n", " ");
             string[] words = textGhoto.Split(' ');
             for (int i = 0; i < words.Length; i++)
@@ -237,6 +239,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             if (_camera != null)
             {
                 viewModel.PhotoProcessingView.PackingImage = _camera;
+                _camera = null;
             }
 
             if (!string.IsNullOrEmpty(viewModel.PhotoProcessingView.SearchLine) &&
@@ -294,7 +297,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                         }
                         catch
                         {
-                            throw;
+
                         }
                     }
                 }
@@ -343,7 +346,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                 var jsonString = await System.IO.File.ReadAllTextAsync(path);
                 viewModel.DataNamesView = DescriptionOfTheDrug(jsonString, _dataNames);
 
-                return View("Index", viewModel);
+                return View("Privacy", viewModel);
             }
 
             return View("Index", viewModel);
