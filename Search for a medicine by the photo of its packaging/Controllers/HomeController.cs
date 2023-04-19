@@ -56,13 +56,18 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
 
         public void SharpenPhoto(string fileName)
         {
-            IFilter filter = new Sharpen();
+            //IFilter filter = new Sharpen();
+            //IFilter g = new Invert();
+            IFilter r = new Grayscale(0.2125, 0.7154, 0.0721);
             var path = "D://Аня//Диплом//Graduate work//" +
                        "Search for a medicine by the photo of its packaging" +
                        "//wwwroot//CameraPhotos//webcam.jpg";
             Bitmap image = (Bitmap)System.Drawing.Image.FromFile(path);
-            Bitmap newImage = filter.Apply(image);
+            //Bitmap newImage = filter.Apply(image);
+            //newImage = g.Apply(newImage);
+            Bitmap newImage = r.Apply(image);
             image.Dispose();
+            image = null;
             System.IO.File.Delete(path);
             newImage.Save("D://Аня//Диплом//Graduate work//" +
                           "Search for a medicine by the photo of its packaging" +
@@ -87,7 +92,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                             var fileExtension = Path.GetExtension(fileName);
                             var newFileName = string.Concat(myUniqueFileName, fileExtension);
                             var filePath = Path.Combine(_environment.WebRootPath, "CameraPhotos") + $@"\{newFileName}";
-                            SharpenPhoto(filePath);
+                            
                             if (!string.IsNullOrEmpty(filePath))
                             {
                                 StoreInFolder(file, filePath);
@@ -148,6 +153,8 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             Bitmap image = (Bitmap)System.Drawing.Image.FromFile(path);
             BarcodeReader reader = new BarcodeReader();
             var result = reader.Decode(image);
+            image.Dispose();
+            image = null;
             if (result == null)
             {
                 return "null";
@@ -205,11 +212,12 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             var loadFromFile =
                 Pix.LoadFromFile(_environment.WebRootPath + "\\CameraPhotos\\" + image.PackingImage.FileName);
             var process = ocrengine.Process(loadFromFile);
-            var textGhoto = process.GetText();
+            var textPhoto = process.GetText();
             loadFromFile.Dispose();
             loadFromFile = null;
-            textGhoto = textGhoto.Replace("\n", " ");
-            string[] words = textGhoto.Split(' ');
+            loadFromFile = null;
+            textPhoto = textPhoto.Replace("\n", " ");
+            string[] words = textPhoto.Split(' ');
             for (int i = 0; i < words.Length; i++)
             {
                 if (words[i] != "" && words[i] != " " && words[i].Length != 0)
