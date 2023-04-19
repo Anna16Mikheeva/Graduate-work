@@ -3,7 +3,7 @@
 
 <div align="justify">
     <font size="4">
-        @if (Model != null)
+        @if (Model != null && Model.DataNamesView != null)
         {
 
             HtmlString nameDrugsRus = new HtmlString(Model.DataNamesView.NameDrugsRus);

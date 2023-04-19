@@ -37,8 +37,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
         /// Экземпляр класса DataNames
         /// </summary>
         private readonly DataNames _dataNames = new DataNames();
-
-        //-------------------
+        
         private readonly IWebHostEnvironment _environment;
 
         private static IFormFile _camera = null;
@@ -56,16 +55,14 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
 
         public void SharpenPhoto(string fileName)
         {
-            //IFilter filter = new Sharpen();
-            //IFilter g = new Invert();
-            IFilter r = new Grayscale(0.2125, 0.7154, 0.0721);
+            IFilter filter = new Grayscale(0.2125, 0.7154, 0.0721);
             var path = "D://Аня//Диплом//Graduate work//" +
                        "Search for a medicine by the photo of its packaging" +
                        "//wwwroot//CameraPhotos//webcam.jpg";
             Bitmap image = (Bitmap)System.Drawing.Image.FromFile(path);
             //Bitmap newImage = filter.Apply(image);
             //newImage = g.Apply(newImage);
-            Bitmap newImage = r.Apply(image);
+            Bitmap newImage = filter.Apply(image);
             image.Dispose();
             image = null;
             System.IO.File.Delete(path);
@@ -105,13 +102,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                         _camera = file;
                         
                     }
-
-                     /*Json(true)*/;
                 }
-                //    else
-                //    {
-
-                //    }
             }
             catch (Exception)
             {
@@ -347,17 +338,13 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
 
             if (viewModel.PhotoProcessingView.Error != "Препарат не найден")
             {
-                //json = await httpClient.GetStringAsync("http://www.vidal.ru/api/rest/v1/product/list?filter[name]=" + search);
-                //StreamWriter writer = new StreamWriter(path, false);
-                //await writer.WriteLineAsync(json);
-                //writer.Close();
                 var jsonString = await System.IO.File.ReadAllTextAsync(path);
                 viewModel.DataNamesView = DescriptionOfTheDrug(jsonString, _dataNames);
 
                 return View("Privacy", viewModel);
             }
 
-            return View("Index", viewModel);
+            return View("Privacy", viewModel);
         }
 
         /// <summary>
