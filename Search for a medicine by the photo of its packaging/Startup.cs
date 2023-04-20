@@ -50,7 +50,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Capture}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
