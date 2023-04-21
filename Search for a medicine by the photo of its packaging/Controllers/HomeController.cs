@@ -38,7 +38,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
         /// </summary>
         private readonly DataNames _dataNames = new DataNames();
         
-        private readonly IWebHostEnvironment _environment;
+        private static IWebHostEnvironment _environment;
 
         private static IFormFile _camera = null;
 
@@ -57,24 +57,6 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             return View();
         }
 
-        /// <summary>
-        /// Возвращает старницу Privacy
-        /// </summary>
-        /// <returns></returns>
-        public async Task<ActionResult> Privacy()
-        {
-            return View();
-        }
-
-        /// <summary>
-        /// Возвращает страницу BarCode
-        /// </summary>
-        /// <returns></returns>
-        public IActionResult BarCode()
-        {
-            return View();
-        }
-
         public IActionResult Capture()
         {
             return View();
@@ -87,9 +69,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
         public void ApplyFilter(string fileName)
         {
             IFilter filter = new Grayscale(0.2125, 0.7154, 0.0721);
-            var path = "D://Аня//Диплом//Graduate work//" +
-                       "Search for a medicine by the photo of its packaging" +
-                       "//wwwroot//CameraPhotos//webcam.jpg";
+            var path = _environment.WebRootPath + "//CameraPhotos//" + fileName;
             Bitmap image = (Bitmap)System.Drawing.Image.FromFile(path);
             //Bitmap newImage = filter.Apply(image);
             //newImage = g.Apply(newImage);
@@ -97,9 +77,8 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             image.Dispose();
             image = null;
             System.IO.File.Delete(path);
-            newImage.Save("D://Аня//Диплом//Graduate work//" +
-                          "Search for a medicine by the photo of its packaging" +
-                          "//wwwroot//CameraPhotos//webcam.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+            newImage.Save(_environment.WebRootPath + "//CameraPhotos//" + fileName,
+                System.Drawing.Imaging.ImageFormat.Jpeg);
         }
 
         /// <summary>
@@ -123,7 +102,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                             var myUniqueFileName = "webcam";
                             var fileExtension = Path.GetExtension(fileName);
                             var newFileName = string.Concat(myUniqueFileName, fileExtension);
-                            var filePath = Path.Combine(_environment.WebRootPath, "CameraPhotos") + $@"\{newFileName}";
+                            var filePath =_environment.WebRootPath + "\\CameraPhotos" + $@"\{newFileName}";
                             
                             if (!string.IsNullOrEmpty(filePath))
                             {
@@ -131,7 +110,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                             }
 
                             var imageBytes = System.IO.File.ReadAllBytes(filePath);
-                            ApplyFilter(filePath);
+                            ApplyFilter(fileName);
                         }
 
                         _camera = file;
@@ -262,7 +241,6 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             if (_camera != null)
             {
                 viewModel.PhotoProcessingView.PackingImage = _camera;
-                _camera = null;
             }
 
             if (!string.IsNullOrEmpty(viewModel.PhotoProcessingView.SearchLine) &&
@@ -298,6 +276,18 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             }
             else if (viewModel.PhotoProcessingView.PackingImage != null)
             {
+                var file = viewModel.PhotoProcessingView.PackingImage;
+                var fileName = file.FileName;
+
+                if (System.IO.File.Exists(fileName) != false)
+                {
+                    string filePath = Path.Combine(_environment.WebRootPath + "\\CameraPhotos\\", fileName);
+                    var fileStream = System.IO.File.Create(filePath);
+                    viewModel.PhotoProcessingView.PackingImage.CopyTo(fileStream);
+                    fileStream.Flush();
+                    fileStream.Close();
+                }
+
                 var barCode = ReadBarCode(viewModel.PhotoProcessingView);
                 if (barCode == "null")
                 {

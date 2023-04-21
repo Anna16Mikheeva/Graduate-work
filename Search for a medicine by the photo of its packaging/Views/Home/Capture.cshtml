@@ -9,8 +9,8 @@
     }
 
     .form {
-        margin-top: 5px;
-        margin-bottom: 5px;
+        margin-top: 15px;
+        margin-bottom: 15px;
     }
 
     .input {
@@ -29,7 +29,7 @@
 
 <br />
             <div id="my_camera" class="div-center"></div>
-            <form class="div-center">
+            <form class="div-center form">
                 <input type="button" class="btn btn-success input"
                        onclick="take_snapshot()" />
             </form>
@@ -48,8 +48,8 @@
 <script src="/webcamjs/webcam.js"></script>
 <script language="javascript">
     Webcam.set({
-        width: 980,
-        height: 720,
+        width: 720,
+        height: 360,
         image_format: 'jpeg',
         jpeg_quality: 90
     });
@@ -63,7 +63,7 @@
                 data_uri +
                 '"/>';
             Webcam.upload(data_uri,
-                'Home/Capture',
+                'Capture',
                 function (code, text) {
                     /*alert('Photo Captured')*/
                 });

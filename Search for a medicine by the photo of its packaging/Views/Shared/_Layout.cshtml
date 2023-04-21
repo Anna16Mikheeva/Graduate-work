@@ -1,7 +1,7 @@
 ﻿@model Search_for_a_medicine_by_the_photo_of_its_packaging.Models.ViewModel
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="rus">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,11 +12,6 @@
 </head>
 
 <style>
-    /*Для поля и кнопки поиска*/
-    * {
-        box-sizing: border-box;
-    }
-
     .form_line_search {
         position: relative;
         width: 80%;
@@ -35,7 +30,7 @@
     .button_line_search {
         position: absolute;
         top: 0;
-        right: 0px;
+        right: 0;
         width: 42px;
         height: 42px;
         border: none;
@@ -50,6 +45,7 @@
             font-size: 16px;
             color: #fff;
         }
+
     /*Для выбора файла*/
     .input__wrapper {
         width: 100%;
@@ -107,30 +103,25 @@
         margin: 0 auto;
     }
 
-    .input__file-button_search {
-        width: 50%;
-        max-width: 60px;
-        height: 60px;
-        background: #1bbc9b;
+    .button {
+        background-color: #1bbc9b;
+        font-size: 15px;
+        font-weight: 700;
+        text-decoration: none;
+        display: inline-block; /* Строчно-блочный элемент */
+        color: #fff; /* Белый цвет текста */
+        padding: 1rem 1.5rem; /* Поля вокруг текста */
+        text-decoration: none; /* Убираем подчёркивание */
+        border-radius: 3px;
         color: #fff;
         font-size: 1.125rem;
         font-weight: 700;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        -webkit-box-pack: start;
-        -ms-flex-pack: start;
-        justify-content: flex-start;
         border-radius: 3px;
-        cursor: pointer;
-        margin: 0 auto auto 100px;
+        margin-bottom: 20px;
     }
 
     .errortext {
-        color: red;
+        color: #8B0000;
     }
 </style>
 
@@ -153,7 +144,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Домашняя страница</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="img/index.png" /></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -174,7 +165,7 @@
                         <span class="input__file-button-text">Выберите файл</span>
                     </label>
                 </div>
-                <a type="button" asp-controller="Home" asp-action="Capture">Камера</a> 
+                <a type="button" class="button" asp-controller="Home" asp-action="Capture">Камера</a> 
             </form>
         </div>
         <div class="text-center errortext">
