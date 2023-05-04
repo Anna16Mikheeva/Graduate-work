@@ -66,11 +66,5 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Models
             public string GNParent { get; set; }//+
             public string description { get; set; }//+
         }
-
-        //+
-        public class Country
-        {
-            public string rusName { get; set; }//+
-        }
     }
 }

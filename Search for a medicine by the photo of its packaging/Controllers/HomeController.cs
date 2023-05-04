@@ -15,6 +15,7 @@ using Tesseract;
 using ZXing.Windows.Compatibility;
 using AForge;
 using AForge.Imaging;
+
 using AForge.Imaging.Filters;
 
 namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
@@ -71,8 +72,6 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             IFilter filter = new Grayscale(0.2125, 0.7154, 0.0721);
             var path = _environment.WebRootPath + "//CameraPhotos//" + fileName;
             Bitmap image = (Bitmap)System.Drawing.Image.FromFile(path);
-            //Bitmap newImage = filter.Apply(image);
-            //newImage = g.Apply(newImage);
             Bitmap newImage = filter.Apply(image);
             image.Dispose();
             image = null;
@@ -110,7 +109,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                             }
 
                             var imageBytes = System.IO.File.ReadAllBytes(filePath);
-                            ApplyFilter(fileName);
+                            //ApplyFilter(fileName);
                         }
 
                         _camera = file;
@@ -159,6 +158,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
         {
             string webRoothPath = _environment.WebRootPath;
             var path = webRoothPath + "\\CameraPhotos\\" + photo.PackingImage.FileName;
+            ApplyFilter(photo.PackingImage.FileName);
             Bitmap image = (Bitmap)System.Drawing.Image.FromFile(path);
             BarcodeReader reader = new BarcodeReader();
             var result = reader.Decode(image);
@@ -197,7 +197,6 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             var textPhoto = process.GetText();
             loadFromFile.Dispose();
             loadFromFile = null;
-            loadFromFile = null;
             textPhoto = textPhoto.Replace("\n", " ");
             string[] wordsArrayString = textPhoto.Split(' ');
             foreach (var word in wordsArrayString)
@@ -212,11 +211,11 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             return wordsArrayString;
         }
 
-        public async Task<string> WriteToFileJson(string path, HttpClient httpClient, ViewModel viewModel)
+        public async Task<string> WriteToFileJson(string path, HttpClient httpClient, ViewModel viewModel, string json)
         {
-            var json = await httpClient.GetStringAsync(
-                "http://www.vidal.ru/api/rest/v1/product/list?filter[name]=" +
-                viewModel.PhotoProcessingView.SearchLine);
+            //var json = await httpClient.GetStringAsync(
+            //    "http://www.vidal.ru/api/rest/v1/product/list?filter[name]=" +
+            //    viewModel.PhotoProcessingView.SearchLine);
             StreamWriter writer = new StreamWriter(path, false);
             await writer.WriteLineAsync(json);
             writer.Close();
@@ -248,23 +247,19 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             {
                 try
                 {
-                    //json = await httpClient.GetStringAsync(
-                    //    "http://www.vidal.ru/api/rest/v1/product/list?filter[name]=" +
-                    //    viewModel.PhotoProcessingView.SearchLine);
+                    var json = await httpClient.GetStringAsync(
+                        "http://www.vidal.ru/api/rest/v1/product/list?filter[name]=" +
+                        viewModel.PhotoProcessingView.SearchLine);
                     //productName = viewModel.PhotoProcessingView.SearchLine;
                     //StreamWriter writer = new StreamWriter(path, false);
                     //await writer.WriteLineAsync(json);
                     //writer.Close();
                     //var jsonString = await System.IO.File.ReadAllTextAsync(path);
                     productName = viewModel.PhotoProcessingView.SearchLine;
-                    jsonString = await WriteToFileJson(path, httpClient, viewModel);
+                    jsonString = await WriteToFileJson(path, httpClient, viewModel, json);
                     var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
                     var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
-                    if (rootobject != null && rootobject.products.Length != 0)
-                    {
-                        productName = viewModel.PhotoProcessingView.SearchLine;
-                    }
-                    else
+                    if (rootobject == null && rootobject.products.Length == 0)
                     {
                         viewModel.PhotoProcessingView.Error = "Препарат не найден";
                     }
@@ -277,9 +272,9 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             else if (viewModel.PhotoProcessingView.PackingImage != null)
             {
                 var file = viewModel.PhotoProcessingView.PackingImage;
-                var fileName = file.FileName;
+                var fileName = _environment.WebRootPath + "\\CameraPhotos\\" + file.FileName;
 
-                if (System.IO.File.Exists(fileName) != false)
+                if (System.IO.File.Exists(fileName) == false)
                 {
                     string filePath = Path.Combine(_environment.WebRootPath + "\\CameraPhotos\\", fileName);
                     var fileStream = System.IO.File.Create(filePath);
@@ -294,26 +289,33 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                     var textRecognising = TextRecognising(viewModel.PhotoProcessingView);
                     foreach (var search in textRecognising)
                     {
-                        try
+                        if (search != "" && search != " ")
                         {
-                            //json = await httpClient.GetStringAsync(
-                            //    "http://www.vidal.ru/api/rest/v1/product/list?filter[name]=" + search);
-                            //StreamWriter writer = new StreamWriter(path, false);
-                            //await writer.WriteLineAsync(json);
-                            //writer.Close();
-                            //var jsonString = await System.IO.File.ReadAllTextAsync(path);
-                            jsonString = await WriteToFileJson(path, httpClient, viewModel);
-                            var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
-                            var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
-                            if (rootobject != null && rootobject.products.Length != 0)
+                            try
                             {
-                                productName = search;
-                                break;
+                                var json = await httpClient.GetStringAsync(
+                                    "http://www.vidal.ru/api/rest/v1/product/list?filter[name]=" + search);
+                                //StreamWriter writer = new StreamWriter(path, false);
+                                //await writer.WriteLineAsync(json);
+                                //writer.Close();
+                                //var jsonString = await System.IO.File.ReadAllTextAsync(path);
+                                jsonString = await WriteToFileJson(path, httpClient, viewModel, json);
+                                var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
+                                var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
+                                if (rootobject == null && rootobject.products.Length == 0)
+                                {
+                                    viewModel.PhotoProcessingView.Error = "Препарат не найден";
+                                    break;
+                                }
+                            }
+                            catch
+                            {
+                                // ignored
                             }
                         }
-                        catch
+                        else
                         {
-                            // ignored
+                            viewModel.PhotoProcessingView.Error = "Препарат не найден";
                         }
                     }
                 }
@@ -322,21 +324,17 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                     try
                     {
                         var searchBarCode = ReadBarCode(viewModel.PhotoProcessingView);
-                        //json = await httpClient.GetStringAsync(
-                        //    "http://www.vidal.ru/api/rest/v1/product/list?filter[barCode]=" + s);
+                        var json = await httpClient.GetStringAsync(
+                            "http://www.vidal.ru/api/rest/v1/product/list?filter[barCode]=" + searchBarCode);
                         //productName = s;
                         //StreamWriter writer = new StreamWriter(path, false);
                         //await writer.WriteLineAsync(json);
                         //writer.Close();
                         //var jsonString = await System.IO.File.ReadAllTextAsync(path);
-                        jsonString = await WriteToFileJson(path, httpClient, viewModel);
+                        jsonString = await WriteToFileJson(path, httpClient, viewModel, json);
                         var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
                         var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
-                        if (rootobject != null && rootobject.products.Length != 0)
-                        {
-                            productName = searchBarCode;
-                        }
-                        else
+                        if (rootobject == null && rootobject.products.Length == 0)
                         {
                             viewModel.PhotoProcessingView.Error = "Препарат не найден";
                         }
@@ -348,10 +346,10 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                 }
             }
 
-            if (productName == null)
-            {
-                viewModel.PhotoProcessingView.Error = "Препарат не найден";
-            }
+            //if (productName == null)
+            //{
+            //    viewModel.PhotoProcessingView.Error = "Препарат не найден";
+            //}
 
             if (viewModel.PhotoProcessingView.Error != "Препарат не найден")
             {
