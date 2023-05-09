@@ -368,10 +368,10 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             {
                 jsonString = await System.IO.File.ReadAllTextAsync(path);
                 viewModel.DataNamesView = DescriptionOfTheDrug(jsonString, _dataNames);
-
-                return View("Index", viewModel);
+                viewModel.PhotoProcessingView.PackingImage = null;
+                //return View("Index", viewModel);
             }
-
+            _camera = null;
             return View("Index", viewModel);
         }
 

@@ -123,19 +123,28 @@
     .errortext {
         color: #8B0000;
     }
-
-
 </style>
 
-@*<script>
-    /*Поиск при нажатии на кнопку "Enter"*/
-    $("#id_of_textbox").keyup(function (event) {
-        if (event.keyCode == 13) {
-            $("#id_of_button").click();
-            $(this).val('');
-        }
-    });
-</script>*@
+<script>
+    document.getElementById("id_of_button").onclick = function (e) {
+        // Если необходимо предотвратить/отменить событие по умолчанию,
+        // то необходимо вызвать метод preventDefault у события
+        // https://developer.mozilla.org/ru/docs/Web/API/Event/preventDefault
+        // e.preventDefault();
+        // если необходимо также предотвратить дальнейшее "всплытие" события,
+        // то необходимо вызвать метод stopPropagation у события
+        // https://developer.mozilla.org/ru/docs/Web/API/Event/stopPropagation
+        // e.stopPropagation();
+        document.getElementById("id_of_textbox").value = "";
+
+        ///*Поиск при нажатии на кнопку "Enter"*/
+        //$("#id_of_textbox").keyup(function (event) {
+        //    if (event.keyCode == 13) {
+        //        $("#id_of_button").click();
+        //        $(this).val('');
+        //    }
+        //});
+    </script>
 
 <body>
     <style>
@@ -158,7 +167,7 @@
         </nav>
         <div class="text-center">
             <form asp-controller="Home" class="form_line_search" enctype="multipart/form-data">
-                <input asp-for="PhotoProcessingView.SearchLine" name="PhotoProcessingView.SearchLine" id="id_of_textbox" class="input_line_search" type="text" placeholder="Искать здесь...">
+                <input asp-for="PhotoProcessingView.SearchLine" name="PhotoProcessingView.SearchLine" id="id_of_textbox" value="" class="input_line_search" type="text" placeholder="Искать здесь...">
                 <button id="id_of_button" class="button_line_search" type="submit" asp-controller="Home" asp-action="ApiVidal"></button>
                 <div class="input__wrapper">
                     <input asp-for="PhotoProcessingView.PackingImage" name="PhotoProcessingView.PackingImage" type="file" id="input__file" accept="image/jpeg,image/png" class="input input__file" multiple>
@@ -167,7 +176,7 @@
                         <span class="input__file-button-text">Выберите файл</span>
                     </label>
                 </div>
-                <a type="button" class="button" asp-controller="Home" asp-action="Capture">Камера</a> 
+                <a type="button" class="button" asp-controller="Home" asp-action="Capture">Камера</a>
             </form>
         </div>
         <div class="text-center errortext">
