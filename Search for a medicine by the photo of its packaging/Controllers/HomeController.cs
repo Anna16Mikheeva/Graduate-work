@@ -38,7 +38,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
         /// Экземпляр класса DataNames
         /// </summary>
         private readonly DataNames _dataNames = new DataNames();
-        
+
         private static IWebHostEnvironment _environment;
 
         private static IFormFile _camera = null;
@@ -48,7 +48,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             _logger = logger;
             _environment = environment;
         }
-        
+
         /// <summary>
         /// Возвращает главную страницу Index
         /// </summary>
@@ -101,8 +101,8 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                             var myUniqueFileName = "webcam";
                             var fileExtension = Path.GetExtension(fileName);
                             var newFileName = string.Concat(myUniqueFileName, fileExtension);
-                            var filePath =_environment.WebRootPath + "\\CameraPhotos" + $@"\{newFileName}";
-                            
+                            var filePath = _environment.WebRootPath + "\\CameraPhotos" + $@"\{newFileName}";
+
                             if (!string.IsNullOrEmpty(filePath))
                             {
                                 StoreInFolder(file, filePath);
@@ -113,7 +113,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                         }
 
                         _camera = file;
-                        
+
                     }
                 }
             }
@@ -259,7 +259,11 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                     jsonString = await WriteToFileJson(path, httpClient, viewModel, json);
                     var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
                     var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
-                    if (rootobject == null && rootobject.products.Length == 0)
+                    if (rootobject != null && rootobject.products.Length != 0)
+                    {
+                        productName = viewModel.PhotoProcessingView.SearchLine;
+                    }
+                    else
                     {
                         viewModel.PhotoProcessingView.Error = "Препарат не найден";
                     }
@@ -302,9 +306,9 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                                 jsonString = await WriteToFileJson(path, httpClient, viewModel, json);
                                 var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
                                 var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
-                                if (rootobject == null && rootobject.products.Length == 0)
+                                if (rootobject != null && rootobject.products.Length != 0)
                                 {
-                                    viewModel.PhotoProcessingView.Error = "Препарат не найден";
+                                    productName = search;
                                     break;
                                 }
                             }
@@ -334,7 +338,11 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
                         jsonString = await WriteToFileJson(path, httpClient, viewModel, json);
                         var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
                         var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
-                        if (rootobject == null && rootobject.products.Length == 0)
+                        if (rootobject != null && rootobject.products.Length != 0)
+                        {
+                            productName = searchBarCode;
+                        }
+                        else
                         {
                             viewModel.PhotoProcessingView.Error = "Препарат не найден";
                         }
@@ -350,6 +358,11 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             //{
             //    viewModel.PhotoProcessingView.Error = "Препарат не найден";
             //}
+
+            if (productName == null)
+            {
+                viewModel.PhotoProcessingView.Error = "Препарат не найден";
+            }
 
             if (viewModel.PhotoProcessingView.Error != "Препарат не найден")
             {
@@ -373,7 +386,7 @@ namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers
             var document = JsonConvert.DeserializeObject<FileJson.Document>(jsonString);
             var product = JsonConvert.DeserializeObject<FileJson.Product>(jsonString);
             var rootobject = JsonConvert.DeserializeObject<FileJson.Rootobject>(jsonString);
-            
+
             //Название препарата на русском
             if (rootobject != null)
             {
