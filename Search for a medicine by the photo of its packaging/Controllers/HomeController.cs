@@ -13,9 +13,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Tesseract;
 using ZXing.Windows.Compatibility;
-using AForge;
-using AForge.Imaging;
-
 using AForge.Imaging.Filters;
 
 namespace Search_for_a_medicine_by_the_photo_of_its_packaging.Controllers

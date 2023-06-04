@@ -123,6 +123,15 @@
     .errortext {
         color: #8B0000;
     }
+
+    .text-center{
+        text-align:center;
+        width: 100%;
+    }
+
+    .menu{
+        height: 85px;
+    }
 </style>
 
 <script>
@@ -153,16 +162,16 @@
         }
     </style>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/img/index.png" /></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+        <nav class=" menu navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white  box-shadow mb-3">
+            <div class="text-center" >
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img width="80" height="80" src="https://img.icons8.com/bubbles/100/home.png" alt="home" /></a>
+                @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
 
-                </div>
+        </div>*@
             </div>
         </nav>
         <div class="text-center">
